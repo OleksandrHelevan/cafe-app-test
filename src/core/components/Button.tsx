@@ -10,9 +10,10 @@ interface ButtonProps {
   onClick: () => void;
   buttonStyle: ButtonStyle;
   type: ButtonType;
+  className?: string;
 }
 
-export function Button({ children, onClick, buttonStyle, type }: ButtonProps) {
+export function Button({ children, onClick, buttonStyle, type, className }: ButtonProps) {
   const baseClass =
     "relative  rounded-3xl text-xl transition-all duration-300 flex" +
     " items-center justify-center h-[40px]";
@@ -32,7 +33,7 @@ export function Button({ children, onClick, buttonStyle, type }: ButtonProps) {
     <button
       type={type}
       onClick={onClick}
-      className={`${baseClass} ${buttonClass}`}
+      className={`${baseClass} ${buttonClass} ${className}`}
     >
       {children}
     </button>

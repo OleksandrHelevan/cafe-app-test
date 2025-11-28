@@ -2,17 +2,20 @@
 import { useState } from "react";
 import { NavigationLink } from "~/core/components/NavigationLink";
 
-export function Navigation() {
+export interface NavigationProps {
+  className?: string;
+}
+export function Navigation({className}: NavigationProps) {
   const [active, setActive] = useState("/");
 
   return (
-    <nav>
-      <ul className="flex gap-4 items-center">
+    <nav className={className}>
+      <ul className="flex items-center gap-2 sm:gap-4 lg:gap-6 text-sm sm:text-base lg:text-lg">
         <li>
           <NavigationLink
             to="#"
-            isActive={active === "/"}
-            onClick={() => setActive("/")}
+            isActive={active === "#home"}
+            onClick={() => setActive("#home")}
           >
             Home
           </NavigationLink>
@@ -21,8 +24,8 @@ export function Navigation() {
         <li>
           <NavigationLink
             to="#"
-            isActive={active === "/menu"}
-            onClick={() => setActive("/menu")}
+            isActive={active === "#menu"}
+            onClick={() => setActive("#menu")}
           >
             Menu
           </NavigationLink>
@@ -31,8 +34,8 @@ export function Navigation() {
         <li>
           <NavigationLink
             to="#"
-            isActive={active === "/events"}
-            onClick={() => setActive("/events")}
+            isActive={active === "#events"}
+            onClick={() => setActive("#events")}
           >
             Events
           </NavigationLink>
@@ -41,8 +44,8 @@ export function Navigation() {
         <li>
           <NavigationLink
             to="#"
-            isActive={active === "/about"}
-            onClick={() => setActive("/about")}
+            isActive={active === "#events"}
+            onClick={() => setActive("#events")}
           >
             About us
           </NavigationLink>
