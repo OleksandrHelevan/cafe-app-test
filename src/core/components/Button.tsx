@@ -13,7 +13,13 @@ interface ButtonProps {
   className?: string;
 }
 
-export function Button({ children, onClick, buttonStyle, type, className }: ButtonProps) {
+export function Button({
+  children,
+  onClick,
+  buttonStyle,
+  type,
+  className,
+}: ButtonProps) {
   const baseClass =
     "relative  rounded-3xl text-xl transition-all duration-300 flex" +
     " items-center justify-center h-[40px]";
@@ -26,7 +32,7 @@ export function Button({ children, onClick, buttonStyle, type, className }: Butt
     menuButton: `bg-transparent shadow-md shadow-orange-900 text-white
       hover:scale-105 px-12`,
     circle: `bg-gradient-to-r from-orange-400 to-orange-600 text-white
-        hover:scale-105 rounded-full w-[40px]  p-0`
+        hover:scale-105 rounded-full w-[40px]  p-0`,
   }[buttonStyle];
 
   return (

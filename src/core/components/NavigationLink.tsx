@@ -8,19 +8,19 @@ interface NavigationLinkProps {
 }
 
 export function NavigationLink({
-                                 to,
-                                 children,
-                                 isActive = false,
-                                 onClick,
-                               }: NavigationLinkProps) {
+  to,
+  children,
+  isActive = false,
+  onClick,
+}: NavigationLinkProps) {
   return (
     <a
       onClick={onClick}
       href={to}
       className={
-        "flex duration-300 items-center justify-center p-1 no-underline transition-colors text-l " +
+        "text-l flex items-center justify-center p-1 no-underline transition-colors duration-300 " +
         (isActive
-          ? "bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600"
+          ? "bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent"
           : "text-gray-400")
       }
     >

@@ -1,21 +1,24 @@
+"use client";
+
 import { Logo } from "~/core/components/Logo";
 import { Navigation } from "~/core/components/Navigation";
 import { Button } from "~/core/components/Button";
 import BurgerMenu from "~/core/components/BurgerMenu";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 
 export function Header() {
+  const router = useRouter();
   return (
-    <header className="fixed flex h-[80px] w-full max-w-[1980px] items-center
-     justify-between bg-[rgba(0,0,0,0.1)] backdrop-blur-[10px] transition-colors
-      duration-300 lg:px-[80px] px-6 md:px-8">
+    <header className="fixed flex h-[80px] w-full max-w-[1980px] items-center justify-between bg-[rgba(0,0,0,0.1)] px-6 backdrop-blur-[10px] transition-colors duration-300 md:px-8 lg:px-[80px]">
       <Logo />
 
       <Navigation className={"hidden lg:flex"} />
 
       <div className="flex items-center gap-8">
         <Button
-          onClick={() => console.log("route")}
+          onClick={() => router.push("/")}
           type="button"
           buttonStyle="colored"
           className={"hidden lg:flex"}
@@ -24,7 +27,7 @@ export function Header() {
         </Button>
 
         <Button
-          onClick={() => console.log("cart")}
+          onClick={() => router.push("/")}
           type="button"
           buttonStyle="circle"
         >
