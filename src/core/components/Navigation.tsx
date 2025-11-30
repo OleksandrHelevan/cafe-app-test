@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useState } from "react";
 import { NavigationLink } from "~/core/components/NavigationLink";
 
@@ -17,20 +17,20 @@ export function Navigation({ className }: NavigationProps) {
   ];
 
   return (
-      <nav className={className}>
-        <ul className="flex items-center gap-2 sm:gap-4 lg:gap-6 text-sm sm:text-base lg:text-lg">
-          {links.map((link) => (
-              <li key={link.to}>
-                <NavigationLink
-                    to={link.to}
-                    isActive={active === link.to}
-                    onClick={() => setActive(link.to)}
-                >
-                  {link.name}
-                </NavigationLink>
-              </li>
-          ))}
-        </ul>
-      </nav>
+    <nav className={className}>
+      <ul className="flex items-center gap-2 text-sm sm:gap-4 sm:text-base lg:gap-6 lg:text-lg">
+        {links.map((link) => (
+          <li key={link.to}>
+            <NavigationLink
+              to={link.to}
+              isActive={active === link.to}
+              onClick={() => setActive(link.to)}
+            >
+              {link.name}
+            </NavigationLink>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }

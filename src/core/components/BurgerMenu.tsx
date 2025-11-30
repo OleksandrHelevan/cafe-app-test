@@ -27,16 +27,14 @@ export default function BurgerMenu() {
       </button>
 
       {open && (
-        <div className="fixed inset-0 z-50 flex h-[100dvh] w-screen flex-col
-         px-4 py-[20px] backdrop-blur-3xl bg-black/50 md:px-6">
+        <div className="fixed inset-0 z-50 flex h-[100dvh] w-screen flex-col bg-[rgba(29,0,0,0.8)] px-4 py-[20px] backdrop-blur-3xl md:px-6">
           <Button
             type="button"
             buttonStyle="circle"
             onClick={() => setOpen(false)}
             className="absolute self-end"
           >
-
-          <svg
+            <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
               viewBox="0 -960 960 960"
