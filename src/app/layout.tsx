@@ -8,6 +8,10 @@ export default function RootLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en">
+    <head>
+        <title>PizzaShop</title>
+        <meta name="description" content="Quick pizza delivery" />
+    </head>
       <body
         className={`font-muller flex flex-col items-center bg-[linear-gradient(180deg,_#1E0C00_0%,_#1F0700_31%,_#170A00_69%,_#1E0D00_100%)]`}
       >
