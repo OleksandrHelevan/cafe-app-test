@@ -18,6 +18,7 @@ export default function BurgerMenu() {
   return (
     <>
       <button
+        aria-label={"Open menu"}
         className="group flex flex-col gap-[6px] lg:hidden"
         onClick={() => setOpen(true)}
       >

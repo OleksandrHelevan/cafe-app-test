@@ -20,7 +20,7 @@ export function Video({ src, preview }: VideoProps) {
 
       <div
         id="video-wrapper"
-        className={`flex justify-center items-center rounded-xl w-[280px] h-[180px] bg-center bg-cover border-2 border-orange-600 ${
+        className={`flex justify-center items-center rounded-xl w-[280px] h-[180px] bg-center bg-cover ${
           !isPlaying ? "" : ""
         }`}
         style={{
