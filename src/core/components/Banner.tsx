@@ -14,16 +14,16 @@ export function Banner({ bannerSrc, topEmoji, bottomEmoji }: BannerProps) {
         src={topEmoji}
         width={378}
         height={401}
-        className="absolute top-[-60px] right-[-50px]"
+        className="absolute top-[-36px] right-[-36px] md:top-[-60px] md:right-[-50px]"
       />
 
       <picture className="overflow-hidden rounded-[48px]">
         <Image
           src={bannerSrc}
           alt="banner"
-          width={360}
-          height={540}
-          className="h-full w-full object-cover"
+          width={908}
+          height={1352}
+          className="h-[360px] w-[240px]  sm:h-[450px] sm:w-[300px] md:h-[540px] md:w-[360px] object-cover"
         />
       </picture>
 
@@ -31,7 +31,7 @@ export function Banner({ bannerSrc, topEmoji, bottomEmoji }: BannerProps) {
         width={394}
         height={406}
         src={bottomEmoji}
-        className="absolute bottom-[-60px] left-[-50px]"
+        className="absolute bottom-[-36px] left-[-36px] md:bottom-[-60px] md:left-[-50px]"
       />
     </div>
   );

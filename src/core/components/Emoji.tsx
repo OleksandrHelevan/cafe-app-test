@@ -15,7 +15,7 @@ export function Emoji({ src, className, width, height }: EmojiProps) {
       height={height}
       alt="emoji"
       className={
-        "h-[160px] w-[160px] transition-transform duration-300 hover:scale-105 " +
+        "h-[120px] w-[120px] md:h-[160px] md:w-[160px] transition-transform duration-300 hover:scale-105 " +
         (className ?? "")
       }
     />

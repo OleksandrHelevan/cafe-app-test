@@ -11,7 +11,7 @@ export function SwitchButton({ first, second }: SwitchButtonProps) {
   const [active, setActive] = useState<"first" | "second">("first");
 
   const buttonBaseClass =
-    "relative w-44 rounded-full py-2 text-xl text-center transition-colors duration-300 cursor-pointer";
+    "relative w-36 sm:w-44 rounded-full py-2 text-xl text-center transition-colors duration-300 cursor-pointer";
 
   return (
     <div className="relative flex w-fit rounded-full border-2 border-orange-400 p-1 bg-transparent">
