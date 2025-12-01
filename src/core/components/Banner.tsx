@@ -3,31 +3,35 @@ import { Emoji } from "./Emoji";
 
 interface BannerProps {
   bannerSrc: string;
-  pizzaEmoji: string;
-  potatoesEmoji: string;
+  topEmoji: string;
+  bottomEmoji: string;
 }
 
-export function Banner({ bannerSrc, pizzaEmoji, potatoesEmoji }: BannerProps) {
+export function Banner({ bannerSrc, topEmoji, bottomEmoji }: BannerProps) {
   return (
-    <div className="relative flex items-center justify-center">
+    <div className="relative flex items-center">
       <Emoji
-        src={pizzaEmoji}
-        className="absolute top-[-60px] right-[-60px]"
+        src={topEmoji}
+        width={378}
+        height={401}
+        className="absolute top-[-60px] right-[-50px]"
       />
 
-      <div className="h-[600px] w-[400px] overflow-hidden rounded-[48px]">
+      <picture className="overflow-hidden rounded-[48px]">
         <Image
           src={bannerSrc}
           alt="banner"
-          width={400}
-          height={600}
+          width={360}
+          height={540}
           className="h-full w-full object-cover"
         />
-      </div>
+      </picture>
 
       <Emoji
-        src={potatoesEmoji}
-        className="absolute bottom-[-60px] left-[-60px]"
+        width={394}
+        height={406}
+        src={bottomEmoji}
+        className="absolute bottom-[-60px] left-[-50px]"
       />
     </div>
   );

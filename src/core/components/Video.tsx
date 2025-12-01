@@ -15,8 +15,8 @@ export function Video({ src, preview }: VideoProps) {
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      <p className="text-lg font-semibold">Cooking process:</p>
+    <div className="flex flex-col gap-2">
+      <p className="text-l text-white">Cooking process:</p>
 
       <div
         id="video-wrapper"
