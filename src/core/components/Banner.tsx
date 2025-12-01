@@ -12,6 +12,8 @@ export function Banner({ bannerSrc, topEmoji, bottomEmoji }: BannerProps) {
     <div className="relative flex items-center">
       <Emoji
         src={topEmoji}
+        width={378}
+        height={401}
         className="absolute top-[-60px] right-[-50px]"
       />
 
@@ -26,6 +28,8 @@ export function Banner({ bannerSrc, topEmoji, bottomEmoji }: BannerProps) {
       </picture>
 
       <Emoji
+        width={394}
+        height={406}
         src={bottomEmoji}
         className="absolute bottom-[-60px] left-[-50px]"
       />
