@@ -12,7 +12,7 @@ export function Header() {
   return (
     <header className="fixed flex h-[80px] w-full max-w-[1980px] items-center
      justify-between bg-[#170A00]/90 px-6 backdrop-blur-[10px]
-     transition-colors duration-300 md:px-8 lg:px-[80px] z-10">
+     transition-colors duration-300 lg:px-[80px] z-10">
       <Logo />
 
       <Navigation className={"hidden lg:flex"} />
