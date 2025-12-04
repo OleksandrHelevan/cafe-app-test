@@ -1,0 +1,6 @@
+export enum PizzaType {
+  MEAT = "MEAT",
+  VEGETARIAN = "VEGETARIAN",
+  SEA_PRODUCTS = "SEA_PRODUCTS",
+  MUSHROOMS = "MUSHROOMS",
+}

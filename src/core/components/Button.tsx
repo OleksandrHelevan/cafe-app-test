@@ -21,7 +21,7 @@ export function Button({
   className,
 }: ButtonProps) {
   const baseClass =
-    "relative  rounded-3xl text-xl transition-all duration-300 flex" +
+    "relative  rounded-3xl transition-all duration-300 flex" +
     " items-center justify-center h-[40px]";
   const buttonClass = {
     colored: `bg-gradient-to-r from-orange-400 to-orange-600 text-white 
@@ -29,10 +29,10 @@ export function Button({
     ingredients: `bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text
       text-transparent border-2 border-orange-500 hover:bg-clip-padding
        hover:text-white px-12`,
-    menuButton: `bg-transparent shadow-md shadow-orange-900 text-white
+    menuButton: `bg-transparent shadow-lg shadow-orange-900 text-white
       hover:scale-105 px-12`,
     circle: `bg-gradient-to-r from-orange-400 to-orange-600 text-white
-        hover:scale-105 rounded-full w-[40px]  p-0`,
+        hover:scale-105 rounded-full w-[40px] p-0`,
   }[buttonStyle];
 
   return (
