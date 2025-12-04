@@ -1,7 +1,9 @@
 @import "tailwindcss";
+
 body {
     background-color: white;
 }
+
 @font-face {
     font-family: 'Muller';
     src: url('/fonts/Muller/Fontfabric-MullerRegular.otf') format('opentype');
@@ -53,4 +55,21 @@ body {
 
 .animate-fadeIn {
     animation: fadeIn 0.4s ease-in;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #FF6432 !important;
+}
+
+@media (max-width: 1024px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none !important;
+    }
+
+}
+
+.swiper-pagination-bullet {
+    background: #FF6432 !important;
 }
