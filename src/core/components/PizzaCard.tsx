@@ -52,7 +52,7 @@ export function PizzaCard({ pizza }: PizzaCardProps) {
           + Ingredients
         </Button>
 
-        <div className="flex w-full items-center justify-around gap-2 px-6">
+        <div className="flex flex-col w-full items-center gap-2 px-6">
           <p className="text-2xl font-bold text-white">
             ${pizza.price.toFixed(2)}
           </p>
