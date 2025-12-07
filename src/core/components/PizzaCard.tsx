@@ -49,7 +49,7 @@ export function PizzaCard({ pizza }: PizzaCardProps) {
           className={"text-s"}
           onClick={() => console.log("Add ingredients")}
         >
-          + Ingredients
+          Ingredients
         </Button>
 
         <div className="flex w-full flex-col items-center gap-2 px-6">
