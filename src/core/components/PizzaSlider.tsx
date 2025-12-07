@@ -33,8 +33,8 @@ export function PizzaSlider() {
 
   useEffect(() => {
     if (data) {
-      setAllPizzas(prev =>
-        page === 0 ? data.content : [...prev, ...data.content]
+      setAllPizzas((prev) =>
+        page === 0 ? data.content : [...prev, ...data.content],
       );
     }
   }, [data, page]);
@@ -43,9 +43,10 @@ export function PizzaSlider() {
     if (
       data &&
       !data.last &&
-      swiper.activeIndex + Number(swiper.params.slidesPerView) >= allPizzas.length
+      swiper.activeIndex + Number(swiper.params.slidesPerView) >=
+        allPizzas.length
     ) {
-      setPage(prev => prev + 1);
+      setPage((prev) => prev + 1);
     }
   };
 
@@ -73,8 +74,8 @@ export function PizzaSlider() {
   if (loading && allPizzas.length === 0) return <Loader />;
 
   return (
-    <div className="w-full z-0">
-      <div className="mb-8 flex justify-center gap-4 text-xl">
+    <div className="z-0 w-full">
+      <div className="mb-8 flex flex-col justify-center gap-4 text-xl sm:grid sm:grid-cols-2 sm:grid-rows-2 md:flex md:flex-row">
         {pizzaTypes.map(([type, name]) => (
           <Button
             key={type}
@@ -103,7 +104,7 @@ export function PizzaSlider() {
         }}
         className="relative w-full"
       >
-        {allPizzas.map(pizza => (
+        {allPizzas.map((pizza) => (
           <SwiperSlide
             key={pizza.name}
             className="mb-10 h-full w-full overflow-visible pt-24"

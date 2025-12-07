@@ -2,7 +2,6 @@
 import "~/styles/globals.css";
 import type { ReactNode } from "react";
 import { Header } from "~/core/components/Header";
-import { Loader } from "~/core/components/Loader";
 
 export default function RootLayout({
   children,
