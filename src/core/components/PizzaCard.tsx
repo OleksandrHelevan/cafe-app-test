@@ -24,7 +24,7 @@ export function PizzaCard({ pizza }: PizzaCardProps) {
       <div className="mt-24 flex flex-col items-center gap-4 text-center">
         <h3 className="text-2xl font-bold text-white">{pizza.name}</h3>
 
-        <p className="text-xs text-gray-500">
+        <p className="text-s text-gray-500">
           {pizza.ingredients.slice(0, 3).join(", ")}...
         </p>
 
