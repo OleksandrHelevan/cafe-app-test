@@ -62,9 +62,11 @@ export function PizzaSlider() {
   const handleTypeChange = (type: PizzaType) => {
     setPizzaType(type);
 
-    const url = new URL(window.location.href);
-    url.searchParams.set("type", type);
-    window.history.replaceState({}, "", url.toString());
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.set("type", type);
+      window.history.replaceState({}, "", url.toString());
+    }
   };
 
   if (loading && allPizzas.length === 0) return <div>Loading...</div>;

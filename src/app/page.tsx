@@ -4,6 +4,7 @@ import { Title } from "~/core/components/Title";
 import { LightningIcon } from "~/core/components/LightningIcon";
 import { SwitchButton } from "~/core/components/SwitchButton";
 import { PizzaSlider } from "~/core/components/PizzaSlider";
+import {Suspense} from "react";
 
 export default function HomePage() {
   return (
@@ -34,7 +35,9 @@ export default function HomePage() {
       </section>
       <section className="flex w-full flex-col items-center justify-center gap-12 p-16 px-32">
         <Title>Menu</Title>
-        <PizzaSlider />
+          <Suspense fallback={<div>Loading menu...</div>}>
+              <PizzaSlider />
+          </Suspense>
       </section>
     </main>
   );
