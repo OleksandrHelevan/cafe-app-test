@@ -1,11 +1,10 @@
+'use client'
 import { Banner } from "~/core/components/Banner";
 import { Video } from "~/core/components/Video";
 import { Title } from "~/core/components/Title";
 import { LightningIcon } from "~/core/components/LightningIcon";
 import { SwitchButton } from "~/core/components/SwitchButton";
 import { PizzaSlider } from "~/core/components/PizzaSlider";
-import { Suspense } from "react";
-import { Loader } from "~/core/components/Loader";
 
 export default function HomePage() {
   return (
