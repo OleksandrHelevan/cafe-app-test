@@ -10,7 +10,7 @@ interface PizzaCardProps {
 }
 export function PizzaCard({ pizza }: PizzaCardProps) {
   return (
-    <div className="relative rounded-2xl w-full bg-orange-950/60 p-4 overflow-visible shadow-md transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-xl">
+    <div className="relative z-0 w-full overflow-visible rounded-2xl bg-orange-950/60 p-4 shadow-md transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-xl">
       <picture className="absolute -top-28 left-[calc(50%_-_120px)] h-60 w-60">
         <Image
           width={240}
@@ -24,9 +24,9 @@ export function PizzaCard({ pizza }: PizzaCardProps) {
       <div className="mt-24 flex flex-col items-center gap-4 text-center">
         <h3 className="text-2xl font-bold text-white">{pizza.name}</h3>
 
-          <p className="text-xs text-gray-500">
-              {pizza.ingredients.slice(0, 3).join(", ")}...
-          </p>
+        <p className="text-xs text-gray-500">
+          {pizza.ingredients.slice(0, 3).join(", ")}...
+        </p>
 
         <div className="flex gap-4">
           {pizza.sizes.map((size) => (
@@ -49,10 +49,10 @@ export function PizzaCard({ pizza }: PizzaCardProps) {
           className={"text-s"}
           onClick={() => console.log("Add ingredients")}
         >
-          + Ingredients
+          Ingredients
         </Button>
 
-        <div className="flex flex-col w-full items-center gap-2 px-6">
+        <div className="flex w-full flex-col items-center gap-2 px-6">
           <p className="text-2xl font-bold text-white">
             ${pizza.price.toFixed(2)}
           </p>
