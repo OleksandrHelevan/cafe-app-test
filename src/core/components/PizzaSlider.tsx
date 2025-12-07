@@ -13,12 +13,13 @@ import { Button } from "~/core/components/Button";
 import type { Swiper as SwiperType } from "swiper";
 import { PizzaType } from "~/core/types/pizzaType";
 import { useSearchParams } from "next/navigation";
+import { Loader } from "~/core/components/Loader";
 
 export function PizzaSlider() {
   const pageSize = 10;
   const searchParams = useSearchParams();
 
-  const initialType = (searchParams.get("type") as PizzaType) ?? "VEGETARIAN";
+  const initialType = (searchParams.get("type") as PizzaType) ?? "MEAT";
   const [pizzaType, setPizzaType] = useState<PizzaType>(initialType);
 
   const [allPizzas, setAllPizzas] = useState<Pizza[]>([]);
@@ -69,10 +70,10 @@ export function PizzaSlider() {
     }
   };
 
-  if (loading && allPizzas.length === 0) return <div>Loading...</div>;
+  if (loading && allPizzas.length === 0) return <Loader />;
 
   return (
-    <div className="w-full">
+    <div className="w-full z-0">
       <div className="mb-8 flex justify-center gap-4 text-xl">
         {pizzaTypes.map(([type, name]) => (
           <Button
