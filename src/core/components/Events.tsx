@@ -15,7 +15,7 @@ const eventsData = [
 
 export function Events() {
   return (
-    <div className="z-0 w-full  text-white lg:w-full overflow-x-auto overflow-y-hidden">
+    <div className="z-0 w-full text-white lg:w-full overflow-x-auto overflow-y-hidden lg:overflow-visible">
         <div
           className="relative w-full min-w-[960px] grid grid-cols-6 gap-5"
           style={{
