@@ -32,7 +32,7 @@ export function PopularPizzaBanner() {
         <div className="absolute inset-0 bg-black/60 z-0"></div>
         <p
           ref={titleRef}
-          className={`relative text-white z-10 text-3xl font-normal transition-all duration-800 ease-in-out transform ${
+          className={`relative text-white text-3xl font-normal transition-all duration-800 ease-in-out transform ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
           }`}
         >

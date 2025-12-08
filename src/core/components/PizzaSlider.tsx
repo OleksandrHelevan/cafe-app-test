@@ -75,7 +75,7 @@ export function PizzaSlider() {
 
   return (
     <div className="z-0 w-full">
-      <div className="mb-8 flex flex-col justify-center gap-4 text-xl sm:grid sm:grid-cols-2 sm:grid-rows-2 md:flex md:flex-row">
+      <div className="mb-8 flex flex-col justify-center gap-2 text-xl sm:grid sm:grid-cols-2 sm:grid-rows-2 md:flex md:flex-row">
         {pizzaTypes.map(([type, name]) => (
           <Button
             key={type}

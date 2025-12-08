@@ -1,10 +1,13 @@
 "use client";
+
 import { PizzaCard } from "~/core/components/PizzaCard";
 import { useGetPopularPizzas } from "~/domains/pizza/useGetPopularPizzas";
 import { Loader } from "~/core/components/Loader";
 import type { Pizza } from "~/domains/pizza/types";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
-export function PopularPizzasBlock() {
+export function PopularPizzasSwiper() {
   const { data, loading } = useGetPopularPizzas();
 
   if (loading || !data) return <Loader />;
@@ -15,22 +18,26 @@ export function PopularPizzasBlock() {
   );
 
   return (
-    <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-      {ordered.map((pizza, index) => {
-        const colSpanClass =
-          index === 2
-            ? "mx-auto sm:col-start-1 sm:col-end-3 lg:col-auto"
-            : "";
-        return (
+    <Swiper
+      slidesPerView={1}
+      spaceBetween={20}
+      breakpoints={{
+        640: { slidesPerView: 2, spaceBetween: 20 },
+        1024: { slidesPerView: 3, spaceBetween: 60 },
+      }}
+      className="relative w-full"
+    >
+      {ordered.map((pizza, index) => (
+        <SwiperSlide
+          key={pizza.name}
+          className="mb-10 h-full w-full overflow-visible pt-24"
+        >
           <PizzaCard
-            key={pizza.name}
             pizza={pizza}
             position={index === 0 ? 2 : index === 1 ? 1 : 3}
-            className={`mt-20 ${colSpanClass}`}
           />
-        );
-      })}
-    </div>
-
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 }

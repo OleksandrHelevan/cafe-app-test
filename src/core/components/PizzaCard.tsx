@@ -90,7 +90,7 @@ export function PizzaCard({ pizza, position, className }: PizzaCardProps) {
           Order Now
         </Button>
         {position && (
-          <p className="absolute bottom-[-28px] rounded-full bg-gradient-to-r from-orange-400 to-orange-500 px-4 py-1 font-semibold text-white opacity-0 transition-opacity duration-1000 group-hover:opacity-100 ">
+          <p className="absolute bottom-[-28px] rounded-full bg-gradient-to-r from-orange-400 to-orange-500 px-4 py-1 font-semibold text-white transition-opacity duration-1000 lg:opacity-0 lg:group-hover:opacity-100 ">
             #{position}
           </p>
         )}
