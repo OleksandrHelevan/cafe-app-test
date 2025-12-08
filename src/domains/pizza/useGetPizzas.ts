@@ -6,15 +6,17 @@ import { pizzas } from "~/domains/pizza/mock";
 interface UseGetPizzasOptions extends GetPizzasRequest {
   page?: number;
   size?: number;
-  delay?: number;
+}
+export function useGetPizzas({ page, size, pizzaType }: UseGetPizzasOptions) {
+  return useGetPizzasMock({ page: page, size: size, pizzaType: pizzaType });
 }
 
-export function useGetPizzas({
-                               page = 0,
-                               size = 10,
-                               delay = 500,
-                               pizzaType,
-                             }: UseGetPizzasOptions = {}) {
+export function useGetPizzasMock({
+  page = 0,
+  size = 10,
+  pizzaType,
+}: UseGetPizzasOptions = {}) {
+  const delay = 500;
   const [data, setData] = useState<Paginated<Pizza> | null>(null);
   const [loading, setLoading] = useState(true);
 

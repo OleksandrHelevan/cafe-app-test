@@ -6,6 +6,8 @@ import { SwitchButton } from "~/core/components/SwitchButton";
 import { PizzaSlider } from "~/core/components/PizzaSlider";
 import { Suspense } from "react";
 import { Loader } from "~/core/components/Loader";
+import { PopularPizzaBanner } from "~/core/components/PopularPizzaBanner";
+import { PopularPizzasSwiper } from "~/core/components/PopularPizzasSwiper";
 
 export default function HomePage() {
   return (
@@ -34,11 +36,13 @@ export default function HomePage() {
           bottomEmoji="/emoji/potatoes-free.png"
         />
       </section>
-      <section className="flex w-full flex-col items-center justify-center gap-12 p-16 px-32">
+      <section className="flex w-full flex-col items-center justify-center gap-8  py-16 px-8 xl:px-32">
         <Title>Menu</Title>
-        <Suspense fallback={<Loader/>}>
+        <Suspense fallback={<Loader />}>
           <PizzaSlider />
         </Suspense>
+        <PopularPizzaBanner />
+        <PopularPizzasSwiper/>
       </section>
     </main>
   );
