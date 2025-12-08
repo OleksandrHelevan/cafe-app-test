@@ -4,7 +4,7 @@ import type { Pizza } from "~/domains/pizza/types";
 
 export function useGetPopularPizzas() {
   const delay = 500;
-  const [data, setData] = useState<Pizza[] | null>(null);
+  const [data, setData] = useState<Pizza[]>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

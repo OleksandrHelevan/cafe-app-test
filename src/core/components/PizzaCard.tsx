@@ -7,10 +7,14 @@ import { MinusIcon, PlusIcon } from "lucide-react";
 
 interface PizzaCardProps {
   pizza: Pizza;
+  position?: number;
+  className?: string;
 }
-export function PizzaCard({ pizza }: PizzaCardProps) {
+export function PizzaCard({ pizza, position, className }: PizzaCardProps) {
   return (
-    <div className="relative z-0 w-full overflow-visible rounded-2xl bg-orange-950/60 p-4 shadow-md transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-xl">
+    <div
+      className={`group relative z-0 w-full overflow-visible rounded-2xl bg-orange-950/60 p-4 shadow-md transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-xl ${className}`}
+    >
       <picture className="absolute -top-28 left-[calc(50%_-_120px)] h-60 w-60">
         <Image
           width={240}
@@ -71,7 +75,7 @@ export function PizzaCard({ pizza }: PizzaCardProps) {
             <Button
               type="button"
               buttonStyle="circle"
-              onClick={() => console.log()}
+              onClick={() => console.log("todo")}
             >
               <PlusIcon />
             </Button>
@@ -85,6 +89,11 @@ export function PizzaCard({ pizza }: PizzaCardProps) {
         >
           Order Now
         </Button>
+        {position && (
+          <p className="absolute bottom-[-28px] rounded-full bg-gradient-to-r from-orange-400 to-orange-500 px-4 py-1 font-semibold text-white opacity-0 transition-opacity duration-1000 group-hover:opacity-100 ">
+            #{position}
+          </p>
+        )}
       </div>
     </div>
   );
