@@ -8,11 +8,15 @@ import { Suspense } from "react";
 import { Loader } from "~/core/components/Loader";
 import { PopularPizzaBanner } from "~/core/components/PopularPizzaBanner";
 import { PopularPizzasSwiper } from "~/core/components/PopularPizzasSwiper";
+import { Events } from "~/core/components/Events";
 
 export default function HomePage() {
   return (
     <main className="mt-[120px] flex w-full max-w-[1980px] flex-col">
-      <section className="flex w-full flex-col-reverse items-center justify-center gap-28 lg:flex-row lg:gap-12 xl:justify-around">
+      <section
+        id={"home"}
+        className="flex w-full flex-col-reverse items-center justify-center gap-28 lg:flex-row lg:gap-12 xl:justify-around"
+      >
         <div className="flex flex-col gap-6 px-4">
           <Title>
             The Fastest
@@ -36,13 +40,19 @@ export default function HomePage() {
           bottomEmoji="/emoji/potatoes-free.png"
         />
       </section>
-      <section className="flex w-full flex-col items-center justify-center gap-8  py-16 px-8 xl:px-32">
+      <section
+        id={"menu"}
+        className="flex w-full flex-col items-center justify-center gap-8 px-8 py-16 xl:px-32"
+      >
         <Title>Menu</Title>
         <Suspense fallback={<Loader />}>
           <PizzaSlider />
         </Suspense>
         <PopularPizzaBanner />
-        <PopularPizzasSwiper/>
+        <PopularPizzasSwiper />
+      </section>
+      <section id={"events"} className={"relative w-full px-8 xl:px-32 overflow-hidden"}>
+        <Events />
       </section>
     </main>
   );
