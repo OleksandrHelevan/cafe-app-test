@@ -18,6 +18,7 @@ export function Header() {
       <Navigation className={"hidden lg:flex"} />
 
       <div className="flex items-center gap-8">
+
         <Button
           onClick={() => router.push("/")}
           type="button"

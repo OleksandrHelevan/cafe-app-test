@@ -5,9 +5,15 @@ interface BannerProps {
   bannerSrc: string;
   topEmoji: string;
   bottomEmoji: string;
+  bannerStyle: "hero" | "about";
 }
 
-export function Banner({ bannerSrc, topEmoji, bottomEmoji }: BannerProps) {
+export function Banner({ bannerSrc, topEmoji, bottomEmoji, bannerStyle }: BannerProps) {
+  const bannerClasses =
+    bannerStyle === "hero"
+      ? "h-[360px] w-[240px] sm:h-[450px] sm:w-[300px] md:h-[540px] md:w-[360px]"
+      : "h-[240px] w-[240px] sm:w-[400px] sm:h-[400px] md:w-[480px] md:h-[480px]";
+
   return (
     <div className="relative flex items-center">
       <Emoji
@@ -23,7 +29,7 @@ export function Banner({ bannerSrc, topEmoji, bottomEmoji }: BannerProps) {
           alt="banner"
           width={908}
           height={1352}
-          className="h-[360px] w-[240px] sm:h-[450px] sm:w-[300px] md:h-[540px] md:w-[360px] object-cover"
+          className={`${bannerClasses} object-cover`}
         />
       </picture>
 
