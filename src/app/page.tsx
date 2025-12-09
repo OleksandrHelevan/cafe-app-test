@@ -9,6 +9,7 @@ import { Loader } from "~/core/components/Loader";
 import { PopularPizzaBanner } from "~/core/components/PopularPizzaBanner";
 import { PopularPizzasSwiper } from "~/core/components/PopularPizzasSwiper";
 import { Events } from "~/core/components/Events";
+import { PizzaImages } from "~/core/components/PizzaImages";
 
 export default function HomePage() {
   return (
@@ -38,6 +39,7 @@ export default function HomePage() {
           bannerSrc="/banners/pizza-banner.png"
           topEmoji="/emoji/pizza.png"
           bottomEmoji="/emoji/potatoes-free.png"
+          bannerStyle={"hero"}
         />
       </section>
       <section
@@ -51,9 +53,38 @@ export default function HomePage() {
         <PopularPizzaBanner />
         <PopularPizzasSwiper />
       </section>
-      <section id={"events"} className={"relative w-full px-8 xl:px-32 overflow-hidden"}>
+      <section
+        id={"events"}
+        className={"relative w-full overflow-hidden px-8 xl:px-32"}
+      >
         <Events />
       </section>
+        <section
+            id="about"
+            className="flex flex-col-reverse gap-24 lg:gap-2 items-center lg:flex-row lg:justify-between lg:px-16 xl:px-32 pt-24 text-gray-400 w-full"
+        >
+            <div className="flex flex-col gap-4 lg:items-start">
+                <Title>About us</Title>
+                <p className="w-64 sm:w-128">
+                    In just a couple of years, we have opened 6 outlets in different cities:
+                    Lviv, Kyiv, Odesa, Chernivtsi, Kharkiv, and in the future we plan to
+                    develop the network in other major cities of Ukraine.
+                </p>
+                <PizzaImages />
+                <p className="w-64 sm:w-128">
+                    The kitchen of each point is at least: 400-500 sq. m. meters, hundreds of
+                    employees, smoothly performing work in order to receive / prepare / form /
+                    deliver customer orders on time.
+                </p>
+            </div>
+            <Banner
+                bannerSrc="/banners/about-us-banner.jpg"
+                topEmoji="/emoji/pizza.png"
+                bottomEmoji="/emoji/potatoes-free.png"
+                bannerStyle="about"
+            />
+        </section>
+
     </main>
   );
 }
