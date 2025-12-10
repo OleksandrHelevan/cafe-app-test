@@ -33,7 +33,7 @@ export default function BurgerMenu() {
             type="button"
             buttonStyle="circle"
             onClick={() => setOpen(false)}
-            className="absolute self-end"
+            className="self-end"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

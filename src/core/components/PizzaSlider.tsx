@@ -15,21 +15,20 @@ import { PizzaType } from "~/core/types/pizzaType";
 import { useSearchParams } from "next/navigation";
 import { Loader } from "~/core/components/Loader";
 
-export function PizzaSlider() {
+interface PizzaSliderProps {
+  onOrderClick: (pizza: Pizza) => void;
+}
+
+export function PizzaSlider({ onOrderClick }: PizzaSliderProps) {
   const pageSize = 10;
   const searchParams = useSearchParams();
-
   const initialType = (searchParams.get("type") as PizzaType) ?? "MEAT";
-  const [pizzaType, setPizzaType] = useState<PizzaType>(initialType);
 
+  const [pizzaType, setPizzaType] = useState<PizzaType>(initialType);
   const [allPizzas, setAllPizzas] = useState<Pizza[]>([]);
   const [page, setPage] = useState(0);
 
-  const { data, loading } = useGetPizzas({
-    page,
-    size: pageSize,
-    pizzaType,
-  });
+  const { data, loading } = useGetPizzas({ page, size: pageSize, pizzaType });
 
   useEffect(() => {
     if (data) {
@@ -44,15 +43,13 @@ export function PizzaSlider() {
       data &&
       !data.last &&
       swiper.activeIndex + Number(swiper.params.slidesPerView) >=
-        allPizzas.length
+      allPizzas.length
     ) {
       setPage((prev) => prev + 1);
     }
   };
 
-  useEffect(() => {
-    setPage(0);
-  }, [pizzaType]);
+  useEffect(() => setPage(0), [pizzaType]);
 
   const pizzaTypes: [PizzaType, string][] = [
     [PizzaType.MEAT, "Meat"],
@@ -63,7 +60,6 @@ export function PizzaSlider() {
 
   const handleTypeChange = (type: PizzaType) => {
     setPizzaType(type);
-
     if (typeof window !== "undefined") {
       const url = new URL(window.location.href);
       url.searchParams.set("type", type);
@@ -109,7 +105,10 @@ export function PizzaSlider() {
             key={pizza.name}
             className="mb-10 h-full w-full overflow-visible pt-24"
           >
-            <PizzaCard pizza={pizza} />
+            <PizzaCard
+              pizza={pizza}
+              onBtnClick={() => onOrderClick(pizza)}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

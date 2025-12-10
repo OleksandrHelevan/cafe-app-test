@@ -9,8 +9,14 @@ interface PizzaCardProps {
   pizza: Pizza;
   position?: number;
   className?: string;
+  onBtnClick: (pizza: Pizza) => void;
 }
-export function PizzaCard({ pizza, position, className }: PizzaCardProps) {
+export function PizzaCard({
+  pizza,
+  position,
+  className,
+  onBtnClick,
+}: PizzaCardProps) {
   return (
     <div
       className={`group relative z-0 w-full overflow-visible rounded-2xl bg-orange-950/60 p-4 shadow-md transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-xl ${className}`}
@@ -28,7 +34,7 @@ export function PizzaCard({ pizza, position, className }: PizzaCardProps) {
       <div className="mt-24 flex flex-col items-center gap-4 text-center">
         <h3 className="text-2xl font-bold text-white">{pizza.name}</h3>
 
-        <p className="text-s text-gray-500">
+        <p className="text-s text-gray-400">
           {pizza.ingredients.slice(0, 3).join(", ")}...
         </p>
 
@@ -85,12 +91,12 @@ export function PizzaCard({ pizza, position, className }: PizzaCardProps) {
         <Button
           type="button"
           buttonStyle="colored"
-          onClick={() => console.log("todo")}
+          onClick={() => onBtnClick(pizza)}
         >
           Order Now
         </Button>
         {position && (
-          <p className="absolute bottom-[-28px] rounded-full bg-gradient-to-r from-orange-400 to-orange-500 px-4 py-1 font-semibold text-white transition-opacity duration-1000 lg:opacity-0 lg:group-hover:opacity-100 ">
+          <p className="absolute bottom-[-28px] rounded-full bg-gradient-to-r from-orange-400 to-orange-500 px-4 py-1 font-semibold text-white transition-opacity duration-1000 lg:opacity-0 lg:group-hover:opacity-100">
             #{position}
           </p>
         )}
