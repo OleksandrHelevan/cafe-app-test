@@ -6,8 +6,6 @@ import { Title } from "~/core/components/Title";
 import { LightningIcon } from "~/core/components/LightningIcon";
 import { SwitchButton } from "~/core/components/SwitchButton";
 import { PizzaSlider } from "~/core/components/PizzaSlider";
-import { Suspense } from "react";
-import { Loader } from "~/core/components/Loader";
 import { PopularPizzaBanner } from "~/core/components/PopularPizzaBanner";
 import { PopularPizzasSwiper } from "~/core/components/PopularPizzasSwiper";
 import { Events } from "~/core/components/Events";

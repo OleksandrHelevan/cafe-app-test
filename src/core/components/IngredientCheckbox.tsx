@@ -8,31 +8,30 @@ interface IngredientCheckboxProps {
 }
 
 export function IngredientCheckbox({
-                                     label,
-                                     defaultChecked = true,
-                                     onChange,
-                                   }: IngredientCheckboxProps) {
+  label,
+  defaultChecked = false,
+  onChange,
+}: IngredientCheckboxProps) {
   const [checked, setChecked] = useState(defaultChecked);
 
   const toggle = () => {
     setChecked((prev) => {
-      onChange?.(!prev);
-      return !prev;
+      const newState = !prev;
+      onChange?.(newState);
+      return newState;
     });
   };
 
   return (
-    <label className="flex items-center gap-2 cursor-pointer select-none text-white text-[16px]">
+    <label className="flex cursor-pointer items-center gap-2 text-[16px] text-white select-none">
       <div
         onClick={toggle}
-        className={`w-5 h-5 flex items-center justify-center rounded border-2 border-orange-500 transition-all 
-          ${checked ? "bg-orange-500" : "bg-transparent"} 
-          relative`}
+        className={`flex h-5 w-5 items-center justify-center rounded border-2 border-orange-500 transition-all ${
+          checked ? "bg-orange-500" : "bg-transparent"
+        } relative`}
       >
         {checked && (
-          <span className="text-white text-sm font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <Check/>
-          </span>
+          <Check className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm text-white" />
         )}
       </div>
       {label}

@@ -54,12 +54,12 @@ export default function RootLayout({
           {children}
           <footer
             className={
-              "mt-24 flex w-full max-w-[1980px] flex-col gap-8 bg-[#130A00]/90 px-8 py-4 md:px-16 lg:px-32"
+              "mt-24 flex w-full max-w-[1980px] flex-col gap-4 bg-[#170A00]/90 px-8 py-8 md:px-16 lg:px-32"
             }
           >
-            <div className={"flex flex-col items-center gap-12 xl:flex-row"}>
+            <div className={"flex flex-col gap-12 items-center xl:items-start xl:flex-row"}>
               <Logo />
-              <div className="md:gp-24 flex flex-col gap-12 px-12 sm:flex-row sm:flex-wrap sm:items-center sm:justify-start md:flex-nowrap">
+              <div className="md:gp-24 flex flex-col gap-12 px-12 sm:flex-row sm:flex-wrap sm:items-center lg:items-start sm:justify-start md:flex-nowrap">
                 <div className="flex flex-col gap-2">
                   <FooterLinkLabel>Home</FooterLinkLabel>
                   <FooterLink link={"#home"}>To order</FooterLink>
