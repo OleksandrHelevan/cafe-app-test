@@ -1,12 +1,12 @@
 "use client";
 import { useState, useCallback } from "react";
-import type { Pizza } from "~/domains/pizza/types";
+import type { GetPizzaResponse } from "~/domains/pizza/types";
 
 export function usePizzaModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const [pizza, setPizza] = useState<Pizza | null>(null);
+  const [pizza, setPizza] = useState<GetPizzaResponse | null>(null);
 
-  const open = useCallback((p: Pizza) => {
+  const open = useCallback((p: GetPizzaResponse) => {
     setPizza(p);
     setIsOpen(true);
   }, []);

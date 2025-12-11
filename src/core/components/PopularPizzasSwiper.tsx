@@ -3,7 +3,7 @@
 import { PizzaCard } from "~/core/components/PizzaCard";
 import { useGetPopularPizzas } from "~/domains/pizza/useGetPopularPizzas";
 import { Loader } from "~/core/components/Loader";
-import type { Pizza } from "~/domains/pizza/types";
+import type { GetPizzaResponse } from "~/domains/pizza/types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 interface PopularPizzasSwiperProps {
-  onOrderClick: (pizza: Pizza) => void;
+  onOrderClick: (pizza: GetPizzaResponse) => void;
 }
 
 export function PopularPizzasSwiper({ onOrderClick }: PopularPizzasSwiperProps) {
@@ -20,8 +20,8 @@ export function PopularPizzasSwiper({ onOrderClick }: PopularPizzasSwiperProps) 
   if (loading || !data) return <Loader />;
   if (data.length < 3) return null;
 
-  const ordered: Pizza[] = [data[1], data[0], data[2]].filter(
-    (p): p is Pizza => !!p,
+  const ordered: GetPizzaResponse[] = [data[1], data[0], data[2]].filter(
+    (p): p is GetPizzaResponse => !!p,
   );
 
   return (
