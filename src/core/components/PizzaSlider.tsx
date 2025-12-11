@@ -14,109 +14,113 @@ import type { Swiper as SwiperType } from "swiper";
 import { PizzaType } from "~/core/types/pizzaType";
 import { useSearchParams } from "next/navigation";
 import { Loader } from "~/core/components/Loader";
+import { Title } from "~/core/components/Title";
 
 interface PizzaSliderProps {
-    onOrderClick: (pizza: GetPizzaResponse) => void;
+  onOrderClick: (pizza: GetPizzaResponse) => void;
 }
 
 export function PizzaSlider({ onOrderClick }: PizzaSliderProps) {
-    const searchParams = useSearchParams();
-    const initialType = (searchParams.get("type") as PizzaType) ?? "MEAT";
+  const searchParams = useSearchParams();
+  const initialType = (searchParams.get("type") as PizzaType) ?? "MEAT";
 
-    const [pizzaType, setPizzaType] = useState<PizzaType>(initialType);
-    const [allPizzas, setAllPizzas] = useState<GetPizzaResponse[]>([]);
-    const [page, setPage] = useState(0);
-    const size = 5;
+  const [pizzaType, setPizzaType] = useState<PizzaType>(initialType);
+  const [allPizzas, setAllPizzas] = useState<GetPizzaResponse[]>([]);
+  const [page, setPage] = useState(0);
+  const size = 5;
 
-    const { data, isLoading } = useGetPizzas({ pizzaType });
+  const { data, isLoading } = useGetPizzas({ pizzaType });
 
-    useEffect(() => {
-        if (data) {
-            const start = page * size;
-            const end = start + size;
-            const pageContent = data.slice(start, end);
+  useEffect(() => {
+    if (data) {
+      const start = page * size;
+      const end = start + size;
+      const pageContent = data.slice(start, end);
 
-            if (page === 0) {
-                setAllPizzas(pageContent);
-            } else {
-                setAllPizzas((prev) => [...prev, ...pageContent]);
-            }
-        }
-    }, [data, page]);
+      if (page === 0) {
+        setAllPizzas(pageContent);
+      } else {
+        setAllPizzas((prev) => [...prev, ...pageContent]);
+      }
+    }
+  }, [data, page]);
 
-    const handleSlideChange = (swiper: SwiperType) => {
-        if (
-            data &&
-            swiper.activeIndex + Number(swiper.params.slidesPerView) >=
-            allPizzas.length
-        ) {
-            setPage((prev) => prev + 1);
-        }
-    };
+  const handleSlideChange = (swiper: SwiperType) => {
+    if (
+      data &&
+      swiper.activeIndex + Number(swiper.params.slidesPerView) >=
+        allPizzas.length
+    ) {
+      setPage((prev) => prev + 1);
+    }
+  };
 
-    useEffect(() => setPage(0), [pizzaType]);
+  useEffect(() => setPage(0), [pizzaType]);
 
-    const pizzaTypes: [PizzaType, string][] = [
-        [PizzaType.MEAT, "Meat"],
-        [PizzaType.MUSHROOMS, "Mushrooms"],
-        [PizzaType.SEA_PRODUCTS, "Seafood"],
-        [PizzaType.VEGETARIAN, "Vegetarian"],
-    ];
+  const pizzaTypes: [PizzaType, string][] = [
+    [PizzaType.MEAT, "Meat"],
+    [PizzaType.MUSHROOMS, "Mushrooms"],
+    [PizzaType.SEA_PRODUCTS, "Seafood"],
+    [PizzaType.VEGETARIAN, "Vegetarian"],
+  ];
 
-    const handleTypeChange = (type: PizzaType) => {
-        setPizzaType(type);
-        if (typeof window !== "undefined") {
-            const url = new URL(window.location.href);
-            url.searchParams.set("type", type);
-            window.history.replaceState({}, "", url.toString());
-        }
-    };
+  const handleTypeChange = (type: PizzaType) => {
+    setPizzaType(type);
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.set("type", type);
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
+  const isEmptyResault = !data || data.length === 0;
 
-    if (isLoading && allPizzas.length === 0) return <Loader />;
+  if (isLoading && allPizzas.length === 0) return <Loader />;
 
-    return (
-        <div className="z-0 w-full">
-            <div className="mb-8 flex flex-col justify-center gap-2 text-xl sm:grid sm:grid-cols-2 sm:grid-rows-2 md:flex md:flex-row">
-                {pizzaTypes.map(([type, name]) => (
-                    <Button
-                        key={type}
-                        type="button"
-                        buttonStyle={pizzaType === type ? "colored" : "menuButton"}
-                        onClick={() => handleTypeChange(type)}
-                    >
-                        {name}
-                    </Button>
-                ))}
-            </div>
-
-            <Swiper
-                slidesPerView={1}
-                spaceBetween={20}
-                navigation
-                pagination={{ clickable: true }}
-                modules={[Navigation, Pagination]}
-                onSlideChange={handleSlideChange}
-                observer
-                observeParents
-                breakpoints={{
-                    640: { slidesPerView: 2, spaceBetween: 20 },
-                    1024: { slidesPerView: 3, spaceBetween: 20 },
-                    1280: { slidesPerView: 4, spaceBetween: 30 },
-                }}
-                className="relative w-full"
+  return (
+    <div className="z-0 w-full">
+      <div className="mb-8 flex flex-col justify-center gap-2 text-xl sm:grid sm:grid-cols-2 sm:grid-rows-2 md:flex md:flex-row">
+        {pizzaTypes.map(([type, name]) => (
+          <Button
+            key={type}
+            type="button"
+            buttonStyle={pizzaType === type ? "colored" : "menuButton"}
+            onClick={() => handleTypeChange(type)}
+          >
+            {name}
+          </Button>
+        ))}
+      </div>
+      {isEmptyResault ? (
+        <p className={"text-xl text-white underline"}>
+          There is no data for your needs
+        </p>
+      ) : (
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={20}
+          navigation
+          pagination={{ clickable: true }}
+          modules={[Navigation, Pagination]}
+          onSlideChange={handleSlideChange}
+          observer
+          observeParents
+          breakpoints={{
+            640: { slidesPerView: 2, spaceBetween: 20 },
+            1024: { slidesPerView: 3, spaceBetween: 20 },
+            1280: { slidesPerView: 4, spaceBetween: 30 },
+          }}
+          className="relative w-full"
+        >
+          {allPizzas.map((pizza) => (
+            <SwiperSlide
+              key={pizza.name}
+              className="mb-10 h-full w-full overflow-visible pt-24"
             >
-                {allPizzas.map((pizza) => (
-                    <SwiperSlide
-                        key={pizza.name}
-                        className="mb-10 h-full w-full overflow-visible pt-24"
-                    >
-                        <PizzaCard
-                            pizza={pizza}
-                            onBtnClick={() => onOrderClick(pizza)}
-                        />
-                    </SwiperSlide>
-                ))}
-            </Swiper>
-        </div>
-    );
+              <PizzaCard pizza={pizza} onBtnClick={() => onOrderClick(pizza)} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
+    </div>
+  );
 }

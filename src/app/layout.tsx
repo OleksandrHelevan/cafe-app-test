@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import "~/styles/globals.css";
 import type { ReactNode } from "react";
 import { Logo } from "~/core/components/Logo";
@@ -11,7 +11,8 @@ import { FooterLinkLabel } from "~/core/components/FooterLinkLabel";
 import { FooterLink } from "~/core/components/FooterLink";
 import { SocialLink } from "~/core/components/SocialLink";
 import { GradientText } from "~/core/components/GradientText";
-import ReactQueryProvider from "~/core/util/ReactQueryProvider";
+import ReactQueryProvider from "~/core/components/ReactQueryProvider";
+import ToastProvider from "~/core/components/ToastProvider";
 
 export default function RootLayout({
   children,
@@ -51,7 +52,10 @@ export default function RootLayout({
             <BurgerMenu />
           </div>
         </header>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <ReactQueryProvider>
+          {children}
+          <ToastProvider />
+        </ReactQueryProvider>
         <footer
           className={
             "mt-24 flex w-full max-w-[1980px] flex-col gap-4 bg-[#170A00]/90 px-8 py-8 md:px-16 lg:px-32"
