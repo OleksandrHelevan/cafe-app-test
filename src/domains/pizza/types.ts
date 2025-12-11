@@ -1,6 +1,6 @@
 import type { PizzaType } from "~/core/types/pizzaType";
 
-export interface Pizza {
+export interface GetPizzaResponse {
   name: string;
   type: PizzaType;
   price: number;

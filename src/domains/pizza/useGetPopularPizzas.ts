@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { pizzas } from "~/domains/pizza/mock";
-import type { Pizza } from "~/domains/pizza/types";
+import type { GetPizzaResponse } from "~/domains/pizza/types";
 
 export function useGetPopularPizzas() {
   const delay = 500;
-  const [data, setData] = useState<Pizza[]>();
+  const [data, setData] = useState<GetPizzaResponse[]>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

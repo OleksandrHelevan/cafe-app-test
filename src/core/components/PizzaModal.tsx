@@ -1,6 +1,6 @@
 "use client";
 
-import type { Pizza } from "~/domains/pizza/types";
+import type { GetPizzaResponse } from "~/domains/pizza/types";
 import { MinusIcon, PlusIcon, X } from "lucide-react";
 import Image from "next/image";
 import { Button } from "~/core/components/Button";
@@ -14,7 +14,7 @@ import { Loader } from "~/core/components/Loader";
 import { sizePrice } from "~/core/constants/sizePrice";
 
 interface PizzaModalProps {
-  pizza: Pizza;
+  pizza: GetPizzaResponse;
   onClose: () => void;
 }
 

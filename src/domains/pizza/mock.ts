@@ -1,8 +1,8 @@
 
 import { PizzaType } from "~/core/types/pizzaType";
-import type { Pizza } from "~/domains/pizza/types";
+import type { GetPizzaResponse } from "~/domains/pizza/types";
 
-export const pizzas: Pizza[] = [
+export const pizzas: GetPizzaResponse[] = [
   {
     name: "Italian",
     type: PizzaType.MEAT,

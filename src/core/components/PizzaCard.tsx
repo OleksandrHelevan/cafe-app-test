@@ -1,15 +1,15 @@
 "use client";
 
-import type { Pizza } from "~/domains/pizza/types";
+import type { GetPizzaResponse } from "~/domains/pizza/types";
 import { Button } from "~/core/components/Button";
 import Image from "next/image";
 import { IngredientsDropdown } from "~/core/components/IngredientsDropdown";
 
 interface PizzaCardProps {
-  pizza: Pizza;
+  pizza: GetPizzaResponse;
   position?: number;
   className?: string;
-  onBtnClick: (pizza: Pizza) => void;
+  onBtnClick: (pizza: GetPizzaResponse) => void;
 }
 export function PizzaCard({
   pizza,
