@@ -3,6 +3,7 @@
 import type { Pizza } from "~/domains/pizza/types";
 import { Button } from "~/core/components/Button";
 import Image from "next/image";
+import { IngredientsDropdown } from "~/core/components/IngredientsDropdown";
 
 interface PizzaCardProps {
   pizza: Pizza;
@@ -48,14 +49,16 @@ export function PizzaCard({
           ))}
         </div>
 
-        <Button
-          type="button"
-          buttonStyle="ingredients"
-          className={"text-s"}
-          onClick={() => console.log("Add ingredients")}
-        >
-          Ingredients
-        </Button>
+        <IngredientsDropdown
+          ingredients={pizza.ingredients.map((name) => ({
+            name,
+            price: 0,
+          }))}
+          selected={pizza.ingredients}
+          onToggle={() => {
+            /* empty */
+          }}
+        />
 
         <div className="flex w-full flex-col items-center gap-2 px-6">
           <p className="text-2xl font-bold text-white">
@@ -68,7 +71,7 @@ export function PizzaCard({
           buttonStyle="colored"
           onClick={() => onBtnClick(pizza)}
         >
-            Choose pizza
+          Choose pizza
         </Button>
         {position && (
           <p className="absolute bottom-[-28px] rounded-full bg-gradient-to-r from-orange-400 to-orange-500 px-4 py-1 font-semibold text-white transition-opacity duration-1000 lg:opacity-0 lg:group-hover:opacity-100">
