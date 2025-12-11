@@ -3,7 +3,6 @@
 import type { Pizza } from "~/domains/pizza/types";
 import { Button } from "~/core/components/Button";
 import Image from "next/image";
-import { MinusIcon, PlusIcon } from "lucide-react";
 
 interface PizzaCardProps {
   pizza: Pizza;
