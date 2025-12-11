@@ -3,14 +3,19 @@
 import type { Pizza } from "~/domains/pizza/types";
 import { Button } from "~/core/components/Button";
 import Image from "next/image";
-import { MinusIcon, PlusIcon } from "lucide-react";
 
 interface PizzaCardProps {
   pizza: Pizza;
   position?: number;
   className?: string;
+  onBtnClick: (pizza: Pizza) => void;
 }
-export function PizzaCard({ pizza, position, className }: PizzaCardProps) {
+export function PizzaCard({
+  pizza,
+  position,
+  className,
+  onBtnClick,
+}: PizzaCardProps) {
   return (
     <div
       className={`group relative z-0 w-full overflow-visible rounded-2xl bg-orange-950/60 p-4 shadow-md transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-xl ${className}`}
@@ -28,19 +33,15 @@ export function PizzaCard({ pizza, position, className }: PizzaCardProps) {
       <div className="mt-24 flex flex-col items-center gap-4 text-center">
         <h3 className="text-2xl font-bold text-white">{pizza.name}</h3>
 
-        <p className="text-s text-gray-500">
-          {pizza.ingredients.slice(0, 3).join(", ")}...
+        <p className="text-s w-[200px] truncate text-gray-400">
+          {pizza.ingredients.join(", ")}
         </p>
 
         <div className="flex gap-4">
           {pizza.sizes.map((size) => (
             <div
               key={size}
-              className={`flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-2 transition ${
-                size === pizza.sizes[1]
-                  ? "border-transparent bg-gradient-to-r from-orange-400 to-orange-500 text-white"
-                  : "border-gray-400 text-gray-500"
-              }`}
+              className={`flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-2 border-gray-400 text-gray-400 transition`}
             >
               {size}
             </div>
@@ -60,37 +61,17 @@ export function PizzaCard({ pizza, position, className }: PizzaCardProps) {
           <p className="text-2xl font-bold text-white">
             ${pizza.price.toFixed(2)}
           </p>
-
-          <div className="flex items-center gap-3">
-            <Button
-              type="button"
-              buttonStyle="circle"
-              onClick={() => {
-                console.log(pizza);
-              }}
-            >
-              <MinusIcon />
-            </Button>
-            <span className="text-xl text-gray-500">1</span>
-            <Button
-              type="button"
-              buttonStyle="circle"
-              onClick={() => console.log("todo")}
-            >
-              <PlusIcon />
-            </Button>
-          </div>
         </div>
 
         <Button
           type="button"
           buttonStyle="colored"
-          onClick={() => console.log("todo")}
+          onClick={() => onBtnClick(pizza)}
         >
-          Order Now
+            Choose pizza
         </Button>
         {position && (
-          <p className="absolute bottom-[-28px] rounded-full bg-gradient-to-r from-orange-400 to-orange-500 px-4 py-1 font-semibold text-white transition-opacity duration-1000 lg:opacity-0 lg:group-hover:opacity-100 ">
+          <p className="absolute bottom-[-28px] rounded-full bg-gradient-to-r from-orange-400 to-orange-500 px-4 py-1 font-semibold text-white transition-opacity duration-1000 lg:opacity-0 lg:group-hover:opacity-100">
             #{position}
           </p>
         )}

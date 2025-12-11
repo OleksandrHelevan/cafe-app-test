@@ -5,9 +5,16 @@ import { useGetPopularPizzas } from "~/domains/pizza/useGetPopularPizzas";
 import { Loader } from "~/core/components/Loader";
 import type { Pizza } from "~/domains/pizza/types";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-export function PopularPizzasSwiper() {
+interface PopularPizzasSwiperProps {
+  onOrderClick: (pizza: Pizza) => void;
+}
+
+export function PopularPizzasSwiper({ onOrderClick }: PopularPizzasSwiperProps) {
   const { data, loading } = useGetPopularPizzas();
 
   if (loading || !data) return <Loader />;
@@ -21,9 +28,12 @@ export function PopularPizzasSwiper() {
     <Swiper
       slidesPerView={1}
       spaceBetween={20}
+      navigation
+      pagination={{ clickable: true }}
+      modules={[Navigation, Pagination]}
       breakpoints={{
         640: { slidesPerView: 2, spaceBetween: 20 },
-        1024: { slidesPerView: 3, spaceBetween: 60 },
+        1024: { slidesPerView: 3, spaceBetween: 40 },
       }}
       className="relative w-full"
     >
@@ -35,6 +45,7 @@ export function PopularPizzasSwiper() {
           <PizzaCard
             pizza={pizza}
             position={index === 0 ? 2 : index === 1 ? 1 : 3}
+            onBtnClick={() => onOrderClick(pizza)}
           />
         </SwiperSlide>
       ))}
