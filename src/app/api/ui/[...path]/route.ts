@@ -1,4 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
