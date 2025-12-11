@@ -14,7 +14,6 @@ import type { Swiper as SwiperType } from "swiper";
 import { PizzaType } from "~/core/types/pizzaType";
 import { useSearchParams } from "next/navigation";
 import { Loader } from "~/core/components/Loader";
-import { Title } from "~/core/components/Title";
 
 interface PizzaSliderProps {
   onOrderClick: (pizza: GetPizzaResponse) => void;
