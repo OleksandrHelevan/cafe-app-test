@@ -73,3 +73,8 @@ body {
 .swiper-pagination-bullet {
     background: #FF6432 !important;
 }
+
+.Toastify__toast {
+    background: #3a2622 !important;
+    font-family: 'Muller', sans-serif;
+}
