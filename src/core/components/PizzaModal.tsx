@@ -59,9 +59,9 @@ export function PizzaModal({ pizza, onClose }: PizzaModalProps) {
     const order: Order = {
       pizzaName: pizza.name,
       pizzaSize: selectedSize,
-      amount,
+      amount: amount,
       ingredients: [...baseIngredients, ...extraIngredients],
-      totalPrice,
+      totalPrice: parseFloat(totalPrice.toFixed(2)),
     };
 
     console.log(order);
@@ -104,8 +104,8 @@ export function PizzaModal({ pizza, onClose }: PizzaModalProps) {
         </div>
       </div>
 
-      <div className="flex w-[260px] flex-col justify-between gap-4">
-        <div className="grid grid-cols-2 gap">
+      <div className="flex w-[260px] flex-col justify-between gap-4 lg:mt-4 lg:mr-4">
+        <div className="gap grid grid-cols-2">
           {pizza.ingredients.map((ing) => (
             <IngredientCheckbox
               key={ing}

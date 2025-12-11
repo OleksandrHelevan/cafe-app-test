@@ -34,8 +34,8 @@ export function IngredientsDropdown({
       </button>
 
       {open && (
-        <div className="absolute top-[110%] left-0 z-[9999] w-full rounded-xl border border-orange-500 bg-[#3A1300] p-3 shadow-lg">
-          <div className="grid max-h-60 grid-cols-1 gap-2 overflow-y-auto">
+        <div className="absolute top-[110%] left-0 z-20 w-full rounded-xl border border-orange-500 bg-[#3A1300] p-2">
+          <div className="grid max-h-[120px] grid-cols-1 gap-2 overflow-y-auto">
             {ingredients.map((ing) => (
               <IngredientCheckbox
                 key={ing.name}
