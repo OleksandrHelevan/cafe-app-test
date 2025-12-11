@@ -13,6 +13,8 @@ import { PizzaImages } from "~/core/components/PizzaImages";
 import { usePizzaModal } from "~/domains/pizza/useModal";
 import { ModalContainer } from "~/core/components/ModalContainer";
 import { PizzaModal } from "~/core/components/PizzaModal";
+import { Suspense } from "react";
+import { Loader } from "~/core/components/Loader";
 
 export default function HomePage() {
   const { open, isOpen, close, pizza } = usePizzaModal();
@@ -52,8 +54,9 @@ export default function HomePage() {
           className="z-0 flex w-full flex-col items-center justify-center gap-8 px-8 py-16 xl:px-32"
         >
           <Title>Menu</Title>
-          <PizzaSlider onOrderClick={open} />
-
+          <Suspense fallback={<Loader />}>
+            <PizzaSlider onOrderClick={open} />
+          </Suspense>
           <PopularPizzaBanner />
           <PopularPizzasSwiper onOrderClick={open} />
         </section>
