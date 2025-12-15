@@ -11,5 +11,5 @@ export interface GetPizzaResponse {
 }
 
 export interface GetPizzasRequest {
-  pizzaType: PizzaType;
+  pizzaType?: PizzaType;
 }
