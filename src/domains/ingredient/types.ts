@@ -11,8 +11,8 @@ export interface Ingredient {
 export type GetIngredientsResponse = Paginated<Ingredient>;
 
 export interface GetIngredientsRequest {
-  size?: number;
-  page?: number;
+  size: number;
+  page: number;
 }
 
 export interface Order {

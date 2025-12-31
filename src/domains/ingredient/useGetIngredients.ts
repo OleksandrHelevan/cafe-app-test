@@ -11,7 +11,7 @@ const SOURCE = process.env.NEXT_PUBLIC_DATA_SOURCE ?? "mock";
 export function useGetIngredients({
                                     page = 0,
                                     size = 10,
-                                  }: GetIngredientsRequest = {}) {
+                                  }: GetIngredientsRequest = {page: 0, size: 10}) {
   return useQuery<GetIngredientsResponse, Error>({
     queryKey: ["ingredients", page, size, SOURCE],
     queryFn: async (): Promise<GetIngredientsResponse> => {
