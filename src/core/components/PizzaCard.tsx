@@ -55,6 +55,7 @@ export function PizzaCard({
             price: 0,
           }))}
           selected={pizza.ingredients}
+          dropDownType={"list"}
           onToggle={() => {
             /* empty */
           }}
