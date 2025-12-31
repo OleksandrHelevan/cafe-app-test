@@ -7,9 +7,9 @@ import { Button } from "~/core/components/Button";
 import { IngredientCheckbox } from "~/core/components/IngredientCheckbox";
 import { useState } from "react";
 import { SizeRadio } from "~/core/components/SizeRadio";
-import { useGetIngredients } from "~/domains/order/useGetIngredients";
+import { useGetIngredients } from "~/domains/ingredient/useGetIngredients";
 import { IngredientsDropdown } from "~/core/components/IngredientsDropdown";
-import type { Order } from "~/domains/order/types";
+import type { Order } from "~/domains/ingredient/types";
 import { Loader } from "~/core/components/Loader";
 import { sizePrice } from "~/core/constants/sizePrice";
 
@@ -21,11 +21,11 @@ interface PizzaModalProps {
 export function PizzaModal({ pizza, onClose }: PizzaModalProps) {
   const [selectedSize, setSelectedSize] = useState<number>(pizza.sizes[1]!);
   const [amount, setAmount] = useState<number>(1);
-  const { data: allIngredients, loading } = useGetIngredients();
+  const { data: allIngredients, isLoading } = useGetIngredients();
+
   const [baseIngredients, setBaseIngredients] = useState<string[]>(
     pizza.ingredients,
   );
-
   const [extraIngredients, setExtraIngredients] = useState<string[]>([]);
 
   const toggleBase = (name: string) => {
@@ -43,31 +43,30 @@ export function PizzaModal({ pizza, onClose }: PizzaModalProps) {
   const increment = () => setAmount((p) => p + 1);
   const decrement = () => setAmount((p) => Math.max(1, p - 1));
 
+  if (!allIngredients || isLoading) return <Loader />;
+
+  const extraPrice = extraIngredients.reduce((sum, name) => {
+    const ing = allIngredients.content.find((i) => i.name === name);
+    return sum + (ing?.price ?? 0);
+  }, 0);
+
+  const multiplier =
+    sizePrice.find((s) => s.size === selectedSize)?.price ?? 1;
+
+  const basePrice = pizza.price * multiplier;
+  const totalPrice = ((basePrice + extraPrice) * amount).toFixed(2);
+
   const handleOrder = () => {
-    if (!allIngredients) return;
-
-    const extraPrice = extraIngredients.reduce((sum, name) => {
-      const ing = allIngredients.find((i) => i.name === name);
-      return sum + (ing?.price ?? 0);
-    }, 0);
-
-    const multiplier =
-      sizePrice.find((s) => s.size === selectedSize)?.price ?? 1;
-    const basePrice = pizza.price * multiplier;
-    const totalPrice = (basePrice + extraPrice) * amount;
-
     const order: Order = {
       pizzaName: pizza.name,
       pizzaSize: selectedSize,
-      amount: amount,
+      amount,
       ingredients: [...baseIngredients, ...extraIngredients],
-      totalPrice: parseFloat(totalPrice.toFixed(2)),
+      totalPrice: Number(totalPrice),
     };
 
     console.log(order);
   };
-
-  if (!allIngredients || loading) return <Loader />;
 
   return (
     <form className="relative flex flex-col gap-4 rounded-2xl border-2 border-orange-600 bg-[#2F0C00] p-6 text-white md:flex-row">
@@ -102,10 +101,14 @@ export function PizzaModal({ pizza, onClose }: PizzaModalProps) {
             <PlusIcon />
           </Button>
         </div>
+
+        <div className="rounded-xl bg-orange-600 px-4 py-2 text-2xl font-bold">
+          ${totalPrice}
+        </div>
       </div>
 
       <div className="flex w-[260px] flex-col justify-between gap-4 lg:mt-4 lg:mr-4">
-        <div className="gap grid grid-cols-2">
+        <div className="grid grid-cols-2 gap-2">
           {pizza.ingredients.map((ing) => (
             <IngredientCheckbox
               key={ing}
@@ -115,13 +118,16 @@ export function PizzaModal({ pizza, onClose }: PizzaModalProps) {
             />
           ))}
         </div>
+
         <IngredientsDropdown
-          ingredients={allIngredients.filter(
+          ingredients={allIngredients.content.filter(
             (i) => !pizza.ingredients.includes(i.name),
           )}
           selected={extraIngredients}
           onToggle={toggleExtra}
+          dropDownType={"checkbox"}
         />
+
         <SizeRadio
           sizes={pizza.sizes}
           selectedSize={selectedSize}
