@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { IngredientCheckbox } from "~/core/components/IngredientCheckbox";
-import type { Ingredient } from "~/domains/order/types";
+import type { Ingredient } from "~/domains/ingredient/types";
 
 export type DropDownType = "list" | "checkbox";
 
