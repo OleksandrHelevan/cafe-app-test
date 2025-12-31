@@ -53,6 +53,8 @@ export function PizzaCard({
           ingredients={pizza.ingredients.map((name) => ({
             name,
             price: 0,
+            portion: 100,
+            id: "id"
           }))}
           selected={pizza.ingredients}
           dropDownType={"list"}
