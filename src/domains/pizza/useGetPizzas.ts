@@ -2,15 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import type { GetPizzasRequest, GetPizzaResponse } from "~/domains/pizza/types";
 import { pizzas } from "~/domains/pizza/mock";
 import { pizzaClient } from "~/domains/pizza/api";
+import { SOURCE } from "~/core/constants/source";
 
-interface UseGetPizzasOptions extends GetPizzasRequest {
-  page?: number;
-  size?: number;
-}
-
-const SOURCE = process.env.NEXT_PUBLIC_DATA_SOURCE ?? "mock";
-
-export function useGetPizzas({ pizzaType }: UseGetPizzasOptions = {}) {
+export function useGetPizzas({ pizzaType }: GetPizzasRequest = {}) {
     return useQuery<GetPizzaResponse[], Error>({
         queryKey: ["pizzas", pizzaType, SOURCE],
         queryFn: async (): Promise<GetPizzaResponse[]> => {

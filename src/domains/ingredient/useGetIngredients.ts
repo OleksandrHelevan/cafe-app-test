@@ -5,8 +5,7 @@ import type {
 } from "~/domains/ingredient/types";
 import { ingredients as mock } from "~/domains/ingredient/mock";
 import { ingredientClient } from "~/domains/ingredient/api";
-
-const SOURCE = process.env.NEXT_PUBLIC_DATA_SOURCE ?? "mock";
+import {SOURCE} from "~/core/constants/source";
 
 export function useGetIngredients({
                                     page = 0,

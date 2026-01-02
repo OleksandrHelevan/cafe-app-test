@@ -2,7 +2,7 @@ import { LoaderItem } from "./LoaderItem";
 
 export function Loader() {
   return (
-    <div className="fixed inset-0 z-30 flex h-full w-full items-center justify-center bg-black/80">
+    <div className="fixed inset-0 z-50 flex h-full w-full items-center justify-center bg-black/80">
       <div
         className="relative h-[200px] w-[200px] pointer-events-none select-none animate-spin"
         style={{

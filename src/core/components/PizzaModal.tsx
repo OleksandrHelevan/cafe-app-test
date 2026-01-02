@@ -69,7 +69,7 @@ export function PizzaModal({ pizza, onClose }: PizzaModalProps) {
   };
 
   return (
-    <form className="relative flex flex-col gap-4 rounded-2xl border-2 border-orange-600 bg-[#2F0C00] p-6 text-white md:flex-row">
+    <form className="relative flex flex-col gap-4 max-h-dvh rounded-2xl border-2 border-orange-600 bg-[#2F0C00] p-6 text-white md:flex-row">
       <Button
         buttonStyle="circle"
         type="button"
@@ -79,7 +79,7 @@ export function PizzaModal({ pizza, onClose }: PizzaModalProps) {
         <X size={30} className="text-gray-300 transition-all hover:scale-105" />
       </Button>
 
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center ">
         <Image
           width={419}
           height={414}
@@ -102,7 +102,8 @@ export function PizzaModal({ pizza, onClose }: PizzaModalProps) {
           </Button>
         </div>
 
-        <div className="rounded-xl bg-orange-600 px-4 py-2 text-2xl font-bold">
+        <div className="rounded-xl bg-gradient-to-r from-orange-400 to-orange-600
+         px-2 py-1 text-xl font-bold mt-4">
           ${totalPrice}
         </div>
       </div>

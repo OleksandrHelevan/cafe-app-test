@@ -10,17 +10,20 @@ import { PopularPizzaBanner } from "~/core/components/PopularPizzaBanner";
 import { PopularPizzasSwiper } from "~/core/components/PopularPizzasSwiper";
 import { Events } from "~/core/components/Events";
 import { PizzaImages } from "~/core/components/PizzaImages";
-import { usePizzaModal } from "~/domains/pizza/useModal";
+import { usePizzaModal } from "~/domains/pizza/usePizzaModal";
 import { ModalContainer } from "~/core/components/ModalContainer";
 import { PizzaModal } from "~/core/components/PizzaModal";
 import { Suspense } from "react";
 import { Loader } from "~/core/components/Loader";
+import { SOURCE } from "~/core/constants/source";
+import { LoginForm } from "~/core/components/LoginForm";
 
 export default function HomePage() {
   const { open, isOpen, close, pizza } = usePizzaModal();
   return (
     <>
       <main className="mt-[120px] flex w-full max-w-[1980px] flex-col">
+
         <section
           id={"home"}
           className="flex w-full flex-col-reverse items-center justify-center gap-28 lg:flex-row lg:gap-12 xl:justify-around"
@@ -57,8 +60,9 @@ export default function HomePage() {
           <Suspense fallback={<Loader />}>
             <PizzaSlider onOrderClick={open} />
           </Suspense>
-          <PopularPizzaBanner />
-          <PopularPizzasSwiper onOrderClick={open} />
+
+          <PopularPizzaBanner source={SOURCE}/>
+          {SOURCE == "mock" && <PopularPizzasSwiper onOrderClick={open} />}
         </section>
         <section
           id={"events"}
@@ -92,8 +96,9 @@ export default function HomePage() {
           />
         </section>
       </main>
-      <ModalContainer open={isOpen}>
+      <ModalContainer open={true}>
         {pizza && <PizzaModal pizza={pizza} onClose={close} />}
+        <LoginForm/>
       </ModalContainer>
     </>
   );

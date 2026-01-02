@@ -7,17 +7,20 @@ export type ButtonType = "button" | "submit";
 
 interface ButtonProps {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   buttonStyle: ButtonStyle;
   type: ButtonType;
+  disabled?: boolean;
   className?: string;
 }
 
 export function Button({
   children,
   onClick,
+  disabled = false,
   buttonStyle,
   type,
+
   className,
 }: ButtonProps) {
   const baseClass =
@@ -39,6 +42,7 @@ export function Button({
     <button
       type={type}
       onClick={onClick}
+      disabled={disabled}
       className={`${baseClass} ${buttonClass} ${className}`}
     >
       {children}

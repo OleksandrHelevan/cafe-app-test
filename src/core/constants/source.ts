@@ -1,0 +1,1 @@
+export const SOURCE: string = process.env.NEXT_PUBLIC_DATA_SOURCE ?? "mock";

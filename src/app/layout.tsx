@@ -1,6 +1,6 @@
 "use client";
 import "~/styles/globals.css";
-import type { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import { Logo } from "~/core/components/Logo";
 import { Navigation } from "~/core/components/Navigation";
 import { Button } from "~/core/components/Button";
@@ -17,6 +17,7 @@ import ToastProvider from "~/core/components/ToastProvider";
 export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   return (
     <html lang="en">
       <head>
