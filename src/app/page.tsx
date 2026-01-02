@@ -17,13 +17,53 @@ import { Suspense } from "react";
 import { Loader } from "~/core/components/Loader";
 import { SOURCE } from "~/core/constants/source";
 import { LoginForm } from "~/core/components/LoginForm";
+import { useLoginModal } from "~/domains/user/useLoginModal";
+import { Logo } from "~/core/components/Logo";
+import { Button } from "~/core/components/Button";
+import { router } from "next/client";
+import BurgerMenu from "~/core/components/BurgerMenu";
+import { Navigation } from "~/core/components/Navigation";
+import Image from "next/image";
 
 export default function HomePage() {
-  const { open, isOpen, close, pizza } = usePizzaModal();
+  const {
+    open: openPizza,
+    isOpen: isPizzaOpen,
+    close: closePizza,
+    pizza,
+  } = usePizzaModal();
+  const {
+    open: openLogin,
+    isOpen: isLoginOpen,
+    close: closeLogin,
+  } = useLoginModal();
   return (
     <>
-      <main className="mt-[120px] flex w-full max-w-[1980px] flex-col">
+      <header className="fixed z-10 flex h-[80px] w-full max-w-[1980px] items-center justify-between bg-[#170A00]/90 px-6 backdrop-blur-[10px] transition-colors duration-300 lg:px-[80px]">
+        <Logo />
+        <Navigation className={"hidden lg:flex"} />
+        <div className="flex items-center gap-8">
+          <Button
+            onClick={openLogin}
+            type="button"
+            buttonStyle="colored"
+            className={"hidden lg:flex"}
+          >
+            Log in
+          </Button>
 
+          <Button
+            onClick={() => router.push("/")}
+            type="button"
+            buttonStyle="circle"
+          >
+            <Image src="icons/bag.svg" alt="bag" width={24} height={24} />
+          </Button>
+
+          <BurgerMenu />
+        </div>
+      </header>
+      <main className="mt-[120px] flex w-full max-w-[1980px] flex-col">
         <section
           id={"home"}
           className="flex w-full flex-col-reverse items-center justify-center gap-28 lg:flex-row lg:gap-12 xl:justify-around"
@@ -58,11 +98,11 @@ export default function HomePage() {
         >
           <Title>Menu</Title>
           <Suspense fallback={<Loader />}>
-            <PizzaSlider onOrderClick={open} />
+            <PizzaSlider onOrderClick={openPizza} />
           </Suspense>
 
-          <PopularPizzaBanner source={SOURCE}/>
-          {SOURCE == "mock" && <PopularPizzasSwiper onOrderClick={open} />}
+          <PopularPizzaBanner source={SOURCE} />
+          {SOURCE == "mock" && <PopularPizzasSwiper onOrderClick={openPizza} />}
         </section>
         <section
           id={"events"}
@@ -96,9 +136,12 @@ export default function HomePage() {
           />
         </section>
       </main>
-      <ModalContainer open={true}>
-        {pizza && <PizzaModal pizza={pizza} onClose={close} />}
-        <LoginForm/>
+      <ModalContainer open={isPizzaOpen}>
+        {pizza && <PizzaModal pizza={pizza} onClose={closePizza} />}
+      </ModalContainer>
+
+      <ModalContainer open={isLoginOpen}>
+        <LoginForm onClose={closeLogin} />
       </ModalContainer>
     </>
   );

@@ -1,6 +1,6 @@
 "use client";
 import "~/styles/globals.css";
-import { type ReactNode, useState } from "react";
+import { type ReactNode } from "react";
 import { Logo } from "~/core/components/Logo";
 import { Navigation } from "~/core/components/Navigation";
 import { Button } from "~/core/components/Button";
@@ -13,11 +13,12 @@ import { SocialLink } from "~/core/components/SocialLink";
 import { GradientText } from "~/core/components/GradientText";
 import ReactQueryProvider from "~/core/components/ReactQueryProvider";
 import ToastProvider from "~/core/components/ToastProvider";
+import { useLoginModal } from "~/domains/user/useLoginModal";
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const { open: openLogin } = useLoginModal();
   return (
     <html lang="en">
       <head>
@@ -27,32 +28,6 @@ export default function RootLayout({
       <body
         className={`font-muller flex flex-col items-center bg-[linear-gradient(180deg,_#1E0C00_0%,_#1F0700_31%,_#170A00_69%,_#1E0D00_100%)]`}
       >
-        <header className="fixed z-10 flex h-[80px] w-full max-w-[1980px] items-center justify-between bg-[#170A00]/90 px-6 backdrop-blur-[10px] transition-colors duration-300 lg:px-[80px]">
-          <Logo />
-
-          <Navigation className={"hidden lg:flex"} />
-
-          <div className="flex items-center gap-8">
-            <Button
-              onClick={() => router.push("/")}
-              type="button"
-              buttonStyle="colored"
-              className={"hidden lg:flex"}
-            >
-              Log in
-            </Button>
-
-            <Button
-              onClick={() => router.push("/")}
-              type="button"
-              buttonStyle="circle"
-            >
-              <Image src="icons/bag.svg" alt="bag" width={24} height={24} />
-            </Button>
-
-            <BurgerMenu />
-          </div>
-        </header>
         <ReactQueryProvider>
           {children}
           <ToastProvider />
