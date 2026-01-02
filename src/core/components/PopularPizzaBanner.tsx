@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+interface PopularPizzaBannerProps {
+  source: string;
+}
 
-export function PopularPizzaBanner() {
+export function PopularPizzaBanner(source: PopularPizzaBannerProps) {
   const titleRef = useRef<HTMLParagraphElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -36,7 +39,7 @@ export function PopularPizzaBanner() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
           }`}
         >
-          MOST POPULAR PIZZA
+          { source.source == "mock"? "MOST POPULAR PIZZA":"CHOOSE YOUR PIZZA"}
         </p>
       </div>
       <div className="w-full"></div>
