@@ -9,7 +9,7 @@ interface LoginFormProps {
   onClose?: () => void;
 }
 export function LoginForm({ onClose }: LoginFormProps) {
-  const { mutate: login, isPending, data } = useLogin();
+  const { mutate: login, isPending } = useLogin();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +36,7 @@ export function LoginForm({ onClose }: LoginFormProps) {
 
   return (
     <form
-      className="relative flex max-h-dvh flex-col gap-8 rounded-2xl border-2 border-orange-600 bg-[#2F0C00] p-8 text-white"
+      className="relative flex max-h-dvh flex-col gap-4 rounded-2xl border-2 border-orange-600 bg-[#2F0C00] p-8 text-white"
       onSubmit={onSubmit}
     >
       <Button
@@ -60,15 +60,13 @@ export function LoginForm({ onClose }: LoginFormProps) {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      {validationError && (
-        <p className="text-sm">{validationError}</p>
-      )}
+      <p className="min-h-[20px] text-sm">
+        {validationError ?? <span></span>}
+      </p>
+
       <Button type="submit" buttonStyle="colored" disabled={isPending}>
         {isPending ? "Logging in..." : "Login"}
       </Button>
-      {data && (
-        <p className="text-sm text-green-600">Logged in as {data.role}</p>
-      )}
     </form>
   );
 }
