@@ -4,7 +4,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   className?: string;
   value: string;
-  type: "text" | "password" | "email";
+  type: "text" | "password" | "email" | "tel";
 }
 
 export function TextInput({

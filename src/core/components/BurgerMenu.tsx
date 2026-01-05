@@ -1,15 +1,17 @@
 "use client";
-
 import { useState } from "react";
 import { NavigationLink } from "~/core/components/NavigationLink";
 import { Button } from "~/core/components/Button";
+import { useModalContext } from "~/core/components/ModalContext";
 
 export default function BurgerMenu() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("Home");
 
+  const { openLogin } = useModalContext();
+
   const links = [
-    { name: "Home", to: "#" },
+    { name: "Home", to: "#home" },
     { name: "Menu", to: "#menu" },
     { name: "Events", to: "#events" },
     { name: "About us", to: "#about" },
@@ -18,7 +20,7 @@ export default function BurgerMenu() {
   return (
     <>
       <button
-        aria-label={"Open menu"}
+        aria-label="Open menu"
         className="group flex flex-col gap-[6px] lg:hidden"
         onClick={() => setOpen(true)}
       >
@@ -52,9 +54,7 @@ export default function BurgerMenu() {
                 <NavigationLink
                   to={link.to}
                   isActive={active === link.name}
-                  onClick={() => {
-                    setActive(link.name);
-                  }}
+                  onClick={() => setActive(link.name)}
                 >
                   {link.name}
                 </NavigationLink>
@@ -66,7 +66,10 @@ export default function BurgerMenu() {
             <Button
               type="button"
               buttonStyle="colored"
-              onClick={() => console.log("Login")}
+              onClick={() => {
+                openLogin();
+                setOpen(false);
+              }}
             >
               Log in
             </Button>

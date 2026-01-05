@@ -1,5 +1,6 @@
 "use client";
-
+import { Suspense } from "react";
+import Image from "next/image";
 import { Banner } from "~/core/components/Banner";
 import { Video } from "~/core/components/Video";
 import { Title } from "~/core/components/Title";
@@ -12,20 +13,26 @@ import { Events } from "~/core/components/Events";
 import { PizzaImages } from "~/core/components/PizzaImages";
 import { ModalContainer } from "~/core/components/ModalContainer";
 import { PizzaModal } from "~/core/components/PizzaModal";
-import { Suspense } from "react";
 import { Loader } from "~/core/components/Loader";
-import { SOURCE } from "~/core/constants/source";
-import { LoginForm } from "~/core/components/LoginForm";
+import { AuthForm } from "~/core/components/AuthForm";
 import { Logo } from "~/core/components/Logo";
 import { Button } from "~/core/components/Button";
 import BurgerMenu from "~/core/components/BurgerMenu";
 import { Navigation } from "~/core/components/Navigation";
-import Image from "next/image";
-import { useModal } from "~/core/util/useModal";
+
+import { SOURCE } from "~/core/constants/source";
+import { ModalProvider, useModalContext } from "~/core/components/ModalContext";
 
 export default function HomePage() {
+  return (
+    <ModalProvider>
+      <MainContent />
+    </ModalProvider>
+  );
+}
 
-  const { modal, isOpen, openLogin, openPizza, close } = useModal();
+function MainContent() {
+  const { modal, isOpen, openLogin, openPizza, close } = useModalContext();
 
   return (
     <>
@@ -38,15 +45,12 @@ export default function HomePage() {
             onClick={openLogin}
             type="button"
             buttonStyle="colored"
-            className={"hidden lg:flex"}
+            className="hidden lg:flex"
           >
             Log in
           </Button>
 
-          <Button
-            type="button"
-            buttonStyle="circle"
-          >
+          <Button type="button" buttonStyle="circle">
             <Image src="icons/bag.svg" alt="bag" width={24} height={24} />
           </Button>
 
@@ -56,7 +60,7 @@ export default function HomePage() {
 
       <main className="mt-[120px] flex w-full max-w-[1980px] flex-col">
         <section
-          id={"home"}
+          id="home"
           className="flex w-full flex-col-reverse items-center justify-center gap-28 lg:flex-row lg:gap-12 xl:justify-around"
         >
           <div className="flex flex-col gap-6 px-4">
@@ -65,26 +69,28 @@ export default function HomePage() {
               <br />
               Pizza <LightningIcon /> Delivery
             </Title>
-            <p className={"text-l w-60 text-gray-400 sm:w-100"}>
+            <p className="text-l w-60 text-gray-400 sm:w-100">
               We will deliver juicy pizza for your family in 30 minutes, if the
               courier is late -{" "}
-              <span className={"text-white"}>pizza is free!</span>
+              <span className="text-white">pizza is free!</span>
             </p>
             <Video
               src="https://www.youtube.com/embed/F_UmiKMwRwA"
               preview="/img/video-preview.png"
             />
-            <SwitchButton first={"To order"} second={"Pizza menu"} />
+            <SwitchButton first="To order" second="Pizza menu" />
           </div>
+
           <Banner
             bannerSrc="/banners/pizza-banner.png"
             topEmoji="/emoji/pizza.png"
             bottomEmoji="/emoji/potatoes-free.png"
-            bannerStyle={"hero"}
+            bannerStyle="hero"
           />
         </section>
+
         <section
-          id={"menu"}
+          id="menu"
           className="z-0 flex w-full flex-col items-center justify-center gap-8 px-8 py-16 xl:px-32"
         >
           <Title>Menu</Title>
@@ -98,9 +104,10 @@ export default function HomePage() {
           )}
         </section>
 
-        <section id={"events"} className={"relative w-full px-8 xl:px-32"}>
+        <section id="events" className="relative w-full px-8 xl:px-32">
           <Events />
         </section>
+
         <section
           id="about"
           className="z-0 flex w-full flex-col-reverse items-center gap-24 pt-24 text-gray-400 lg:flex-row lg:justify-between lg:gap-2 lg:px-16 xl:px-32"
@@ -119,6 +126,7 @@ export default function HomePage() {
               receive / prepare / form / deliver customer orders on time.
             </p>
           </div>
+
           <Banner
             bannerSrc="/banners/about-us-banner.jpg"
             topEmoji="/emoji/pizza.png"
@@ -128,8 +136,7 @@ export default function HomePage() {
         </section>
       </main>
       <ModalContainer open={isOpen}>
-        {modal?.type === "login" && <LoginForm onClose={close} />}
-
+        {modal?.type === "login" && <AuthForm onClose={close} />}
         {modal?.type === "pizza" && (
           <PizzaModal pizza={modal.pizza} onClose={close} />
         )}
