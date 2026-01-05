@@ -2,23 +2,16 @@
 import "~/styles/globals.css";
 import { type ReactNode } from "react";
 import { Logo } from "~/core/components/Logo";
-import { Navigation } from "~/core/components/Navigation";
-import { Button } from "~/core/components/Button";
-import { router } from "next/client";
-import BurgerMenu from "~/core/components/BurgerMenu";
-import Image from "next/image";
 import { FooterLinkLabel } from "~/core/components/FooterLinkLabel";
 import { FooterLink } from "~/core/components/FooterLink";
 import { SocialLink } from "~/core/components/SocialLink";
 import { GradientText } from "~/core/components/GradientText";
 import ReactQueryProvider from "~/core/components/ReactQueryProvider";
 import ToastProvider from "~/core/components/ToastProvider";
-import { useLoginModal } from "~/domains/user/useLoginModal";
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
-  const { open: openLogin } = useLoginModal();
   return (
     <html lang="en">
       <head>

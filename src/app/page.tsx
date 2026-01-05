@@ -10,38 +10,29 @@ import { PopularPizzaBanner } from "~/core/components/PopularPizzaBanner";
 import { PopularPizzasSwiper } from "~/core/components/PopularPizzasSwiper";
 import { Events } from "~/core/components/Events";
 import { PizzaImages } from "~/core/components/PizzaImages";
-import { usePizzaModal } from "~/domains/pizza/usePizzaModal";
 import { ModalContainer } from "~/core/components/ModalContainer";
 import { PizzaModal } from "~/core/components/PizzaModal";
 import { Suspense } from "react";
 import { Loader } from "~/core/components/Loader";
 import { SOURCE } from "~/core/constants/source";
 import { LoginForm } from "~/core/components/LoginForm";
-import { useLoginModal } from "~/domains/user/useLoginModal";
 import { Logo } from "~/core/components/Logo";
 import { Button } from "~/core/components/Button";
-import { router } from "next/client";
 import BurgerMenu from "~/core/components/BurgerMenu";
 import { Navigation } from "~/core/components/Navigation";
 import Image from "next/image";
+import { useModal } from "~/core/util/useModal";
 
 export default function HomePage() {
-  const {
-    open: openPizza,
-    isOpen: isPizzaOpen,
-    close: closePizza,
-    pizza,
-  } = usePizzaModal();
-  const {
-    open: openLogin,
-    isOpen: isLoginOpen,
-    close: closeLogin,
-  } = useLoginModal();
+
+  const { modal, isOpen, openLogin, openPizza, close } = useModal();
+
   return (
     <>
       <header className="fixed z-10 flex h-[80px] w-full max-w-[1980px] items-center justify-between bg-[#170A00]/90 px-6 backdrop-blur-[10px] transition-colors duration-300 lg:px-[80px]">
         <Logo />
-        <Navigation className={"hidden lg:flex"} />
+        <Navigation className="hidden lg:flex" />
+
         <div className="flex items-center gap-8">
           <Button
             onClick={openLogin}
@@ -53,7 +44,6 @@ export default function HomePage() {
           </Button>
 
           <Button
-            onClick={() => router.push("/")}
             type="button"
             buttonStyle="circle"
           >
@@ -63,6 +53,7 @@ export default function HomePage() {
           <BurgerMenu />
         </div>
       </header>
+
       <main className="mt-[120px] flex w-full max-w-[1980px] flex-col">
         <section
           id={"home"}
@@ -102,12 +93,12 @@ export default function HomePage() {
           </Suspense>
 
           <PopularPizzaBanner source={SOURCE} />
-          {SOURCE == "mock" && <PopularPizzasSwiper onOrderClick={openPizza} />}
+          {SOURCE === "mock" && (
+            <PopularPizzasSwiper onOrderClick={openPizza} />
+          )}
         </section>
-        <section
-          id={"events"}
-          className={"relative w-full overflow-hidden px-8 xl:px-32"}
-        >
+
+        <section id={"events"} className={"relative w-full px-8 xl:px-32"}>
           <Events />
         </section>
         <section
@@ -123,7 +114,7 @@ export default function HomePage() {
             </p>
             <PizzaImages />
             <p className="w-64 sm:w-128">
-              The kitchen of each point is at least: 400-500 sq. m. meters,
+              The kitchen of each point is at least: 400–500 sq. m. meters,
               hundreds of employees, smoothly performing work in order to
               receive / prepare / form / deliver customer orders on time.
             </p>
@@ -136,12 +127,12 @@ export default function HomePage() {
           />
         </section>
       </main>
-      <ModalContainer open={isPizzaOpen}>
-        {pizza && <PizzaModal pizza={pizza} onClose={closePizza} />}
-      </ModalContainer>
+      <ModalContainer open={isOpen}>
+        {modal?.type === "login" && <LoginForm onClose={close} />}
 
-      <ModalContainer open={isLoginOpen}>
-        <LoginForm onClose={closeLogin} />
+        {modal?.type === "pizza" && (
+          <PizzaModal pizza={modal.pizza} onClose={close} />
+        )}
       </ModalContainer>
     </>
   );

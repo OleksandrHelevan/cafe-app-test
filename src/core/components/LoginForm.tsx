@@ -43,7 +43,7 @@ export function LoginForm({ onClose }: LoginFormProps) {
         buttonStyle="circle"
         type="button"
         onClick={onClose}
-        className="!absolute top-0 right-2"
+        className="!absolute -top-2 -right-2"
       >
         <X size={24} className="text-gray-300 transition-all hover:scale-105" />
       </Button>
