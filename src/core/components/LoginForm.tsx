@@ -3,9 +3,13 @@ import { TextInput } from "~/core/components/TextInput";
 import { Button } from "~/core/components/Button";
 import { useLogin } from "~/domains/user/useLogin";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "~/core/constants/regex";
+import { X } from "lucide-react";
 
-export function LoginForm() {
-  const { mutate: login, isPending, data } = useLogin();
+interface LoginFormProps {
+  onClose?: () => void;
+}
+export function LoginForm({ onClose }: LoginFormProps) {
+  const { mutate: login, isPending } = useLogin();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +26,7 @@ export function LoginForm() {
 
     if (!PASSWORD_REGEX.test(password)) {
       setValidationError(
-        "Password must be at least 8 characters and contain 1 uppercase letter",
+        `Password must be correct`,
       );
       return;
     }
@@ -31,8 +35,19 @@ export function LoginForm() {
   };
 
   return (
-    <form className="relative flex max-h-dvh flex-col gap-8 rounded-2xl border-2 border-orange-600 bg-[#2F0C00] p-6 text-white"
-    onSubmit={onSubmit}>
+    <form
+      className="relative flex max-h-dvh flex-col gap-4 rounded-2xl border-2 border-orange-600 bg-[#2F0C00] p-8 text-white"
+      onSubmit={onSubmit}
+    >
+      <Button
+        buttonStyle="circle"
+        type="button"
+        onClick={onClose}
+        className="!absolute -top-2 -right-2"
+      >
+        <X size={24} className="text-gray-300 transition-all hover:scale-105" />
+      </Button>
+
       <TextInput
         id="email"
         type="email"
@@ -45,15 +60,13 @@ export function LoginForm() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      {validationError && (
-        <p className="text-sm text-red-500">{validationError}</p>
-      )}
+      <p className="min-h-[20px] text-sm">
+        {validationError ?? <span></span>}
+      </p>
+
       <Button type="submit" buttonStyle="colored" disabled={isPending}>
         {isPending ? "Logging in..." : "Login"}
       </Button>
-      {data && (
-        <p className="text-sm text-green-600">Logged in as {data.role}</p>
-      )}
     </form>
   );
 }

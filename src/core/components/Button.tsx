@@ -24,7 +24,7 @@ export function Button({
   className,
 }: ButtonProps) {
   const baseClass =
-    "relative rounded-3xl transition-all duration-300 flex" +
+    "rounded-3xl transition-all duration-300 flex" +
     " items-center justify-center h-[40px] cursor-pointer";
   const buttonClass = {
     colored: `bg-gradient-to-r from-orange-400 to-orange-600 text-white 
