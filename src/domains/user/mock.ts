@@ -2,17 +2,21 @@ import { Role } from "~/core/types/role";
 
 export const users = [
   {
-    username: "admin",
+    id: "mock-id-1",
+    email: "admin@gmail.com",
+    firstName: "admin",
+    lastName: "admin",
     password: "admin",
     role: Role.ADMIN,
-    email: "admin@gmail.com",
     phone: "+380981054032"
   },
   {
-    username: "client",
+    id: "mock-id-2",
+    email: "client@gmail.com",
+    firstName: "client",
+    lastName: "client",
     password: "client",
     role: Role.CLIENT,
-    email: "client@gmail.com",
     phone: "+380981054032"
   }
 ]
