@@ -20,12 +20,10 @@ export function useLogin() {
           throw new Error("Invalid email or password");
         }
 
-        const expiresIn = new Date(Date.now() + 1000 * 60);
-
         return {
           role: user.role,
           token: `mock-jwt-${user.role}-${Date.now()}`,
-          expiresIn,
+          expiresIn: new Date(Date.now() + 1000 * 60 * 60 * 24)
         };
       }
 
