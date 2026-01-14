@@ -3,6 +3,8 @@ import type { LoginRequest, LoginResponse } from "~/domains/user/types";
 import { userClient } from "~/domains/user/api";
 import { users } from "~/domains/user/mock";
 import { showNotification } from "~/core/util/notifications";
+import { setCookie } from "~/core/util/cookies";
+import { Role } from "~/core/types/role";
 
 const SOURCE = process.env.NEXT_PUBLIC_DATA_SOURCE ?? "mock";
 
@@ -18,22 +20,34 @@ export function useLogin() {
           throw new Error("Invalid email or password");
         }
 
-        const expiresIn = new Date(Date.now() + 1000 * 60 * 60);
-
         return {
           role: user.role,
           token: `mock-jwt-${user.role}-${Date.now()}`,
-          expiresIn,
+          expiresIn: new Date(Date.now() + 1000 * 60 * 60 * 24)
         };
       }
 
       return userClient.login(request);
     },
     onSuccess: (data: LoginResponse) => {
-      showNotification({ text: `Logged in as ${data.role}`, mode: "success" });
+      const expiresMs = new Date(data.expiresIn).getTime() - Date.now();
+      const isAdmin = data.role === Role.ADMIN;
+
+      const expiresDays = expiresMs / (1000 * 60 * 60 * 24);
+
+      setCookie("token", data.token, expiresDays);
+      setCookie("isAdmin", isAdmin.toString(), expiresDays);
+
+      showNotification({
+        text: `Logged in as ${data.role}`,
+        mode: "success",
+      });
     },
     onError: (error: Error) => {
-      showNotification({ text: `Error: ${error.message}`, mode: "error" });
+      showNotification({
+        text: `Error: ${error.message}`,
+        mode: "error",
+      });
     },
   });
 }

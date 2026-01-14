@@ -6,7 +6,7 @@ export const users = [
     email: "admin@gmail.com",
     firstName: "admin",
     lastName: "admin",
-    password: "admin",
+    password: "Admin123",
     role: Role.ADMIN,
     phone: "+380981054032"
   },
