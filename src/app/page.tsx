@@ -22,6 +22,8 @@ import { Navigation } from "~/core/components/Navigation";
 
 import { SOURCE } from "~/core/constants/source";
 import { ModalProvider, useModalContext } from "~/core/components/ModalContext";
+import { getCookie } from "~/core/util/cookies";
+import { AdminPanel } from "~/core/components/AdminPanel";
 
 export default function HomePage() {
   return (
@@ -32,8 +34,10 @@ export default function HomePage() {
 }
 
 function MainContent() {
-  const { modal, isOpen, openLogin, openPizza, close } = useModalContext();
+  const { modal, isOpen, openLogin, openPizza, openAdminPanel, close } = useModalContext();
 
+  const isAuth = getCookie("isAdmin");
+  const isAdmin = isAuth === "true";
   return (
     <>
       <header className="fixed z-10 flex h-[80px] w-full max-w-[1980px] items-center justify-between bg-[#170A00]/90 px-6 backdrop-blur-[10px] transition-colors duration-300 lg:px-[80px]">
@@ -41,14 +45,26 @@ function MainContent() {
         <Navigation className="hidden lg:flex" />
 
         <div className="flex items-center gap-8">
-          <Button
-            onClick={openLogin}
-            type="button"
-            buttonStyle="colored"
-            className="hidden lg:flex"
-          >
-            Log in
-          </Button>
+          {!isAuth && (
+            <Button
+              onClick={openLogin}
+              type="button"
+              buttonStyle="colored"
+              className="hidden lg:flex"
+            >
+              Log in
+            </Button>
+          )}
+          {
+            isAdmin && <Button
+              type="button"
+              buttonStyle="colored"
+              className="hidden lg:flex"
+              onClick={openAdminPanel}
+            >
+              Dashboards
+            </Button>
+          }
 
           <Button type="button" buttonStyle="circle">
             <Image src="icons/bag.svg" alt="bag" width={24} height={24} />
@@ -140,6 +156,7 @@ function MainContent() {
         {modal?.type === "pizza" && (
           <PizzaModal pizza={modal.pizza} onClose={close} />
         )}
+        {modal?.type === "adminPanel" && <AdminPanel/>}
       </ModalContainer>
     </>
   );
