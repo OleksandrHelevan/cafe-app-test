@@ -1,6 +1,8 @@
 "use client";
-import { Suspense } from "react";
+
+import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
+
 import { Banner } from "~/core/components/Banner";
 import { Video } from "~/core/components/Video";
 import { Title } from "~/core/components/Title";
@@ -24,6 +26,7 @@ import { SOURCE } from "~/core/constants/source";
 import { ModalProvider, useModalContext } from "~/core/components/ModalContext";
 import { getCookie } from "~/core/util/cookies";
 import { AdminPanel } from "~/core/components/AdminPanel";
+import { AddPizzaModal } from "~/core/components/AddPizzaModal";
 
 export default function HomePage() {
   return (
@@ -34,10 +37,19 @@ export default function HomePage() {
 }
 
 function MainContent() {
-  const { modal, isOpen, openLogin, openPizza, openAdminPanel, close } = useModalContext();
+  const { modal, isOpen, openLogin, openPizza, openAdminPanel, close } =
+    useModalContext();
 
-  const isAuth = getCookie("isAdmin");
-  const isAdmin = isAuth === "true";
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setIsAdmin(getCookie("isAdmin") === "true");
+  }, []);
+
+  if (!mounted) return null; // ⬅️ КРИТИЧНО для hydration
+
   return (
     <>
       <header className="fixed z-10 flex h-[80px] w-full max-w-[1980px] items-center justify-between bg-[#170A00]/90 px-6 backdrop-blur-[10px] transition-colors duration-300 lg:px-[80px]">
@@ -45,7 +57,7 @@ function MainContent() {
         <Navigation className="hidden lg:flex" />
 
         <div className="flex items-center gap-8">
-          {!isAuth && (
+          {!isAdmin && (
             <Button
               onClick={openLogin}
               type="button"
@@ -55,8 +67,9 @@ function MainContent() {
               Log in
             </Button>
           )}
-          {
-            isAdmin && <Button
+
+          {isAdmin && (
+            <Button
               type="button"
               buttonStyle="colored"
               className="hidden lg:flex"
@@ -64,10 +77,10 @@ function MainContent() {
             >
               Dashboards
             </Button>
-          }
+          )}
 
           <Button type="button" buttonStyle="circle">
-            <Image src="icons/bag.svg" alt="bag" width={24} height={24} />
+            <Image src="/icons/bag.svg" alt="bag" width={24} height={24} />
           </Button>
 
           <BurgerMenu />
@@ -85,15 +98,18 @@ function MainContent() {
               <br />
               Pizza <LightningIcon /> Delivery
             </Title>
+
             <p className="text-l w-60 text-gray-400 sm:w-100">
               We will deliver juicy pizza for your family in 30 minutes, if the
-              courier is late -{" "}
+              courier is late –{" "}
               <span className="text-white">pizza is free!</span>
             </p>
+
             <Video
               src="https://www.youtube.com/embed/F_UmiKMwRwA"
               preview="/img/video-preview.png"
             />
+
             <SwitchButton first="To order" second="Pizza menu" />
           </div>
 
@@ -110,11 +126,13 @@ function MainContent() {
           className="z-0 flex w-full flex-col items-center justify-center gap-8 px-8 py-16 xl:px-32"
         >
           <Title>Menu</Title>
+
           <Suspense fallback={<Loader />}>
             <PizzaSlider onOrderClick={openPizza} />
           </Suspense>
 
           <PopularPizzaBanner source={SOURCE} />
+
           {SOURCE === "mock" && (
             <PopularPizzasSwiper onOrderClick={openPizza} />
           )}
@@ -130,16 +148,17 @@ function MainContent() {
         >
           <div className="flex flex-col gap-4 lg:items-start">
             <Title>About us</Title>
+
             <p className="w-64 sm:w-128">
               In just a couple of years, we have opened 6 outlets in different
-              cities: Lviv, Kyiv, Odesa, Chernivtsi, Kharkiv, and in the future
-              we plan to develop the network in other major cities of Ukraine.
+              cities: Lviv, Kyiv, Odesa, Chernivtsi, Kharkiv.
             </p>
+
             <PizzaImages />
+
             <p className="w-64 sm:w-128">
-              The kitchen of each point is at least: 400–500 sq. m. meters,
-              hundreds of employees, smoothly performing work in order to
-              receive / prepare / form / deliver customer orders on time.
+              The kitchen of each point is at least 400–500 sq. meters with
+              hundreds of employees.
             </p>
           </div>
 
@@ -151,12 +170,14 @@ function MainContent() {
           />
         </section>
       </main>
+
       <ModalContainer open={isOpen}>
         {modal?.type === "login" && <AuthForm onClose={close} />}
         {modal?.type === "pizza" && (
           <PizzaModal pizza={modal.pizza} onClose={close} />
         )}
-        {modal?.type === "adminPanel" && <AdminPanel/>}
+        {modal?.type === "adminPanel" && <AdminPanel onClose={close} />}
+        {modal?.type === "addPizza" && <AddPizzaModal onClose={close} />}
       </ModalContainer>
     </>
   );

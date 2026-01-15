@@ -4,4 +4,5 @@ export type ModalState =
   | { type: "login" }
   | { type: "pizza"; pizza: GetPizzaResponse }
   | {type: "adminPanel"}
+  | {type: "addPizza"}
   | null;

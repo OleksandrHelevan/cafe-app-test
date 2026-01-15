@@ -10,18 +10,19 @@ interface ModalContextProps {
   openLogin: () => void;
   openPizza: (pizza: GetPizzaResponse) => void;
   openAdminPanel: () => void;
+  openAddPizza: () => void;
   close: () => void;
 }
 
 const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 
 export function ModalProvider({ children }: { children: ReactNode }) {
-  const { modal, isOpen, openLogin, openPizza, openAdminPanel, close } =
+  const { modal, isOpen, openLogin, openPizza, openAdminPanel, openAddPizza, close } =
     useModal();
 
   return (
     <ModalContext.Provider
-      value={{ modal, isOpen, openLogin, openPizza, openAdminPanel, close }}
+      value={{ modal, isOpen, openLogin, openPizza, openAdminPanel, openAddPizza, close }}
     >
       {children}
     </ModalContext.Provider>

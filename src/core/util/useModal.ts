@@ -17,6 +17,10 @@ export function useModal() {
     setModal({ type: "adminPanel" });
   }, []);
 
+  const openAddPizza = useCallback(()=> {
+    setModal({ type: "addPizza" });
+  }, [])
+
   const close = useCallback(() => {
     setModal(null);
   }, []);
@@ -27,6 +31,7 @@ export function useModal() {
     openLogin,
     openPizza,
     openAdminPanel,
+    openAddPizza,
     close,
   };
 }
