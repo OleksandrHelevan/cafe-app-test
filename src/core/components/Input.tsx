@@ -1,21 +1,21 @@
 import type { ChangeEvent, InputHTMLAttributes } from "react";
 
-interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   className?: string;
   value: string;
-  type: "text" | "password" | "email" | "tel";
+  type: "text" | "password" | "email" | "tel" | "number";
   placeholder?: string;
 }
 
-export function TextInput({
+export function Input({
   type = "text",
   id,
   value,
   onChange,
   className,
   placeholder
-}: TextInputProps & {
+}: InputProps & {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }) {

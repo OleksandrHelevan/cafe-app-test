@@ -1,7 +1,7 @@
 "use client";
 
 import { type FormEvent, useState } from "react";
-import { TextInput } from "~/core/components/TextInput";
+import { Input } from "~/core/components/Input";
 import { Button } from "~/core/components/Button";
 import { useLogin } from "~/domains/user/useLogin";
 import { useSignup } from "~/domains/user/useSignup";
@@ -108,21 +108,21 @@ export function AuthForm({ onClose }: AuthFormProps) {
 
       {mode === "register" && (
         <>
-          <TextInput
+          <Input
             id="firstName"
             type="text"
             placeholder="First name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
-          <TextInput
+          <Input
             id="lastName"
             type="text"
             placeholder="Last name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
-          <TextInput
+          <Input
             id="phone"
             type="tel"
             placeholder="Phone number"
@@ -132,14 +132,14 @@ export function AuthForm({ onClose }: AuthFormProps) {
         </>
       )}
 
-      <TextInput
+      <Input
         id="email"
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <TextInput
+      <Input
         id="password"
         type="password"
         placeholder="Password"
