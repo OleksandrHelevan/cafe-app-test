@@ -1,4 +1,4 @@
-import { TextInput } from "~/core/components/TextInput";
+import { Input } from "~/core/components/Input";
 import { useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "~/core/components/Button";
@@ -18,7 +18,7 @@ export function AddPizzaModal({ onClose }: AddPizzaModalProps) {
       >
         <X size={24} className="text-gray-300 hover:scale-105" />
       </Button>
-      <TextInput
+      <Input
         id={"name"}
         value={pizzaName}
         type={"text"}
