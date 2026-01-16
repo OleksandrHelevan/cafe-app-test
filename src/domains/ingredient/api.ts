@@ -6,7 +6,7 @@ import type {
 import { GET_INGREDIENTS_PATH } from "~/core/constants/apiPath";
 
 class IngredientClient extends ApiClient {
-  async detIngredients(
+  async getIngredients(
     request: GetIngredientsRequest,
   ): Promise<GetIngredientsResponse> {
     return this.get(GET_INGREDIENTS_PATH(request.size, request.page));

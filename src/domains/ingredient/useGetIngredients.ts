@@ -50,7 +50,7 @@ export function useGetIngredients({
         };
       }
 
-      return ingredientClient.detIngredients({ page, size });
+      return ingredientClient.getIngredients({ page, size });
     },
   });
 }
