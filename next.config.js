@@ -1,7 +1,7 @@
 import "./src/env.js";
 
 /** @type {import("next").NextConfig} */
-const config = {
+const nextConfig = {
   output: "export",
   images: {
     remotePatterns: [
@@ -14,4 +14,4 @@ const config = {
   },
 };
 
-export default config;
+export default nextConfig;
