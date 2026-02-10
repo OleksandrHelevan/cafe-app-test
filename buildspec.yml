@@ -1,4 +1,4 @@
-version: 0.1
+version: 0.2
 
 phases:
   install:
@@ -8,10 +8,17 @@ phases:
       - echo Installing dependencies...
       - npm ci
 
+  pre_build:
+    commands:
+      - echo Checking code...
+      - npm run check
+
   build:
     commands:
-      - echo Build Next.js app...
-      - npm run deploy
+      - echo Building Next.js app...
+      - npm run build
+      - echo Exporting static files...
+      - npx next export
 
 artifacts:
   files:
