@@ -71,7 +71,7 @@ export function PizzaSlider({ onOrderClick }: PizzaSliderProps) {
       window.history.replaceState({}, "", url.toString());
     }
   };
-  const isEmptyResault = !data || data.length === 0;
+  const isEmptyResult = !data || data.length === 0;
 
   if (isLoading && allPizzas.length === 0) return <Loader />;
 
@@ -89,7 +89,7 @@ export function PizzaSlider({ onOrderClick }: PizzaSliderProps) {
           </Button>
         ))}
       </div>
-      {isEmptyResault ? (
+      {isEmptyResult ? (
         <p className={"text-xl text-white underline"}>
           There is no data for your needs
         </p>
@@ -113,7 +113,7 @@ export function PizzaSlider({ onOrderClick }: PizzaSliderProps) {
           {allPizzas.map((pizza) => (
             <SwiperSlide
               key={pizza.name}
-              className="mb-10 h-full w-full overflow-visible pt-24"
+              className="mb-10 mt-8 h-full w-full overflow-visible pt-24"
             >
               <PizzaCard pizza={pizza} onBtnClick={() => onOrderClick(pizza)} />
             </SwiperSlide>

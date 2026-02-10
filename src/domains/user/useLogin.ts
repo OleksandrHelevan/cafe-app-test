@@ -31,7 +31,7 @@ export function useLogin() {
     },
     onSuccess: (data: LoginResponse) => {
       const expiresMs = new Date(data.expiresIn).getTime() - Date.now();
-      const isAdmin = data.role === Role.ADMIN;
+      const isAdmin = data.role == Role.ADMIN;
 
       const expiresDays = expiresMs / (1000 * 60 * 60 * 24);
 

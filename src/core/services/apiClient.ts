@@ -29,8 +29,37 @@ export class ApiClient {
       method,
       headers,
       body: data ? JSON.stringify(data) : undefined,
+      credentials: "include",
     });
 
+    return this.handleResponse<T>(response);
+  }
+
+  private async doFormRequest<T>(
+    endpoint: string,
+    method: "POST" | "PUT",
+    formData: FormData,
+    customHeaders?: Record<string, string>,
+  ): Promise<T> {
+    const headers = new Headers();
+
+    if (customHeaders) {
+      for (const [key, value] of Object.entries(customHeaders)) {
+        headers.set(key, value);
+      }
+    }
+
+    const response = await fetch(`${this.baseUrl}${endpoint}`, {
+      method,
+      headers,
+      body: formData,
+      credentials: "include",
+    });
+
+    return this.handleResponse<T>(response);
+  }
+
+  private async handleResponse<T>(response: Response): Promise<T> {
     const isJson = response.headers
       .get("Content-Type")
       ?.includes("application/json");
@@ -80,5 +109,21 @@ export class ApiClient {
 
   delete<T>(endpoint: string, headers?: Record<string, string>): Promise<T> {
     return this.doRequest<T>(endpoint, "DELETE", undefined, headers);
+  }
+
+  postForm<T>(
+    endpoint: string,
+    formData: FormData,
+    headers?: Record<string, string>,
+  ): Promise<T> {
+    return this.doFormRequest<T>(endpoint, "POST", formData, headers);
+  }
+
+  putForm<T>(
+    endpoint: string,
+    formData: FormData,
+    headers?: Record<string, string>,
+  ): Promise<T> {
+    return this.doFormRequest<T>(endpoint, "PUT", formData, headers);
   }
 }

@@ -48,7 +48,7 @@ function MainContent() {
     setIsAdmin(getCookie("isAdmin") === "true");
   }, []);
 
-  if (!mounted) return null; // ⬅️ КРИТИЧНО для hydration
+  if (!mounted) return null;
 
   return (
     <>

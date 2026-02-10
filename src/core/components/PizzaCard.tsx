@@ -21,13 +21,13 @@ export function PizzaCard({
     <div
       className={`group relative z-0 w-full overflow-visible rounded-2xl bg-orange-950/60 p-4 shadow-md transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-xl ${className}`}
     >
-      <picture className="absolute -top-28 left-[calc(50%_-_120px)] h-60 w-60">
+      <picture className="absolute -top-32 left-[calc(50%_-_120px)] h-60 w-60 rounded-[50%] ">
         <Image
           width={240}
           height={240}
           src={pizza.image}
           alt={pizza.name}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover rounded-full"
         />
       </picture>
 
